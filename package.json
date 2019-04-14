@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
-    "@babel/preset-env": "^7.4.3"
+    "@babel/preset-env": "^7.4.3",
+    "bili": "^4.7.3"
   }
 }
