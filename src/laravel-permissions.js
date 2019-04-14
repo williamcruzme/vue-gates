@@ -41,5 +41,9 @@ export default {
 
       getRoles: () => window.Laravel.roles,
     };
+
+    Vue.directive('can', {
+      inserted: when((current, value) => current.includes(value)),
+    });
   }
 };
