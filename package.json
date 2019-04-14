@@ -28,5 +28,9 @@
   "homepage": "https://github.com/williamcruzme/laravel-permissions#readme",
   "peerDependencies": {
     "vue": "^2.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.3",
+    "@babel/preset-env": "^7.4.3"
   }
 }
