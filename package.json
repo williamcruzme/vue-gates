@@ -5,6 +5,7 @@
   "main": "dist/laravel-permissions.js",
   "unpkg": "dist/laravel-permissions.min.js",
   "scripts": {
+    "eslint": "eslint src/**",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -32,6 +33,8 @@
   "devDependencies": {
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "bili": "^4.7.3"
+    "babel-eslint": "^10.0.1",
+    "bili": "^4.7.3",
+    "eslint": "^5.16.0"
   }
 }
