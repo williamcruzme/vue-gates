@@ -56,5 +56,12 @@ export default {
         return values.some(value => current.includes(value));
       }),
     });
+
+    Vue.directive('hasallroles', {
+      inserted: when((current, value) => {
+        const values = value.split('|');
+        return values.every(value => current.includes(value));
+      }),
+    });
   }
 };
