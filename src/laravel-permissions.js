@@ -45,5 +45,9 @@ export default {
     Vue.directive('can', {
       inserted: when((current, value) => current.includes(value)),
     });
+
+    Vue.directive('role', {
+      inserted: when((current, value) => current.includes(value)),
+    });
   }
 };
