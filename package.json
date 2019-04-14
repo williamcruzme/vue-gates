@@ -1,0 +1,32 @@
+{
+  "name": "laravel-permissions",
+  "version": "1.0.0",
+  "description": "A Vue.js 2 directive for Laravel Permissions",
+  "main": "dist/laravel-permissions.js",
+  "unpkg": "dist/laravel-permissions.min.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/williamcruzme/laravel-permissions.git"
+  },
+  "keywords": [
+    "Laravel",
+    "Permissions",
+    "Vue Directive",
+    "Vue.js"
+  ],
+  "author": "John Cruz <sv.johncruz@gmail.com>",
+  "license": "MIT",
+  "files": [
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/williamcruzme/laravel-permissions/issues"
+  },
+  "homepage": "https://github.com/williamcruzme/laravel-permissions#readme",
+  "peerDependencies": {
+    "vue": "^2.0.0"
+  }
+}
