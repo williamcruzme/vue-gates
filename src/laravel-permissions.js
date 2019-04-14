@@ -49,5 +49,12 @@ export default {
     Vue.directive('role', {
       inserted: when((current, value) => current.includes(value)),
     });
+
+    Vue.directive('hasanyrole', {
+      inserted: when((current, value) => {
+        const values = value.split('|');
+        return values.some(value => current.includes(value));
+      }),
+    });
   }
 };
