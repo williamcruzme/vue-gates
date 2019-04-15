@@ -76,6 +76,11 @@ export default {
       can: permission => window.Laravel.permissions.includes(permission),
       role: role => window.Laravel.roles.includes(role),
 
+      hasAnyPermission: (values) => {
+        const permissions = values.split('|');
+        return permissions.some(permission => window.Laravel.permissions.includes(permission));
+      },
+
       hasAnyRole: (values) => {
         const roles = values.split('|');
         return roles.some(role => window.Laravel.roles.includes(role));
@@ -93,6 +98,10 @@ export default {
 
     Vue.directive('role', {
       inserted: when(Vue.prototype.$laravel.role),
+    });
+
+    Vue.directive('hasanypermission', {
+      inserted: when(Vue.prototype.$laravel.hasAnyPermission),
     });
 
     Vue.directive('hasanyrole', {
