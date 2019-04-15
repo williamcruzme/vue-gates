@@ -125,5 +125,14 @@ export default {
 
     Vue.directive('permission', { inserted: callFunctionFromDirective });
     Vue.directive('role', { inserted: callFunctionFromDirective });
+
+    // Alias for "v-permission:has"
+    Vue.directive('can', {
+      inserted: (el, binding) => {
+        if (!Vue.prototype.$laravel.hasPermission(binding.value)) {
+          el.parentNode.removeChild(el);
+        }
+      },
+    });
   },
 };

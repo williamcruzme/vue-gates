@@ -58,6 +58,9 @@ Check for a specific permission:
 
 ```vue
 <button v-permission="'add articles'">Add Article</button>
+
+<!-- Alias -->
+<button v-can="'add articles'">Add Article</button>
 ```
 
 Check for any permission in a list:
