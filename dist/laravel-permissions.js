@@ -50,13 +50,13 @@
         }
       };
       Vue.directive('can', {
-        inserted: when(function (current, value) {
-          return current.includes(value);
+        inserted: when(function (permissions, permission) {
+          return permissions.includes(permission);
         })
       });
       Vue.directive('role', {
-        inserted: when(function (current, value) {
-          return current.includes(value);
+        inserted: when(function (roles, role) {
+          return roles.includes(role);
         })
       });
       Vue.directive('hasanyrole', {

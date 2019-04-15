@@ -1,5 +1,3 @@
-'use strict';
-
 // Apply directive when condition is true
 var when = function when(condition) {
   return function (el, binding) {
@@ -74,4 +72,4 @@ var laravelPermissions = {
   }
 };
 
-module.exports = laravelPermissions;
+export default laravelPermissions;
