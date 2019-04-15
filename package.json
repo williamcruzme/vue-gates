@@ -2,8 +2,9 @@
   "name": "laravel-permissions",
   "version": "1.0.0",
   "description": "A Vue.js 2 directive for Laravel Permissions",
-  "main": "dist/laravel-permissions.js",
+  "module": "dist/laravel-permissions.esm.js",
   "unpkg": "dist/laravel-permissions.min.js",
+  "main": "dist/laravel-permissions.js",
   "scripts": {
     "build": "yarn rollup -c",
     "eslint": "eslint src/**",

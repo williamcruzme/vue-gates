@@ -12,6 +12,10 @@ export default {
       file: 'dist/laravel-permissions.min.js',
       format: 'cjs',
     },
+    {
+      file: 'dist/laravel-permissions.esm.js',
+      format: 'esm',
+    },
   ],
   plugins: [
     babel({
