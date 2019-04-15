@@ -13,7 +13,7 @@ The frontend needs to know the permissions and roles assigned, for this purpose 
  * Display a listing of permissions from current logged user.
  *
  * @return \Illuminate\Http\JsonResponse
-  */
+ */
 public function permissions()
 {
     return auth()->user()->getAllPermissions()->pluck('name');
@@ -23,7 +23,7 @@ public function permissions()
  * Display a listing of roles from current logged user.
  *
  * @return \Illuminate\Http\JsonResponse
-  */
+ */
 public function roles()
 {
     return auth()->user()->getRoleNames();
