@@ -30,16 +30,36 @@ export default {
     window.Laravel = {};
 
     Vue.prototype.$laravel = {
+      /*
+      |-------------------------------------------------------------------------
+      | Setters
+      |-------------------------------------------------------------------------
+      |
+      | These functions controls the "permissions" and "roles" provided
+      | by Laravel Permissions, or from a custom array. This plugin
+      | is not working when "permissions" or "roles" is not defined.
+      |
+      */
+
       setPermissions: (permissions) => {
         window.Laravel.permissions = permissions;
       },
-
-      getPermissions: () => window.Laravel.permissions,
 
       setRoles: (roles) => {
         window.Laravel.roles = roles;
       },
 
+      /*
+      |-------------------------------------------------------------------------
+      | Getters
+      |-------------------------------------------------------------------------
+      |
+      | These functions return the "permissions" and "roles" stored.
+      | This is useful when you want list all data.
+      |
+      */
+
+      getPermissions: () => window.Laravel.permissions,
       getRoles: () => window.Laravel.roles,
     };
 
