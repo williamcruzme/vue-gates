@@ -44,8 +44,8 @@ Route::get('roles', 'UserController@roles');
 The plugin creates an instance of Laravel accessible globally, and at the same time it registers all the directives.
 
 ```js
-import Vue from 'vue'
-import LaravelPermissions from 'laravel-permissions'
+import Vue from 'vue';
+import LaravelPermissions from 'laravel-permissions';
 
 Vue.use(LaravelPermissions);
 ```
