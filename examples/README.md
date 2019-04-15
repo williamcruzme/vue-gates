@@ -4,9 +4,10 @@ This is a example for Laravel implementation. This requires [Laravel Permissions
 
 ## Steps
 
-### Step 1: Add functions to UserController
+### Step 1: Add function to PermissionController
 
 The frontend needs to know the permissions and roles assigned, for this purpose two endpoints are created that return this information.
+> In this case we will use the magic method `__invoke` to send the function call in the routes
 
 ```php
 /**
@@ -14,17 +15,24 @@ The frontend needs to know the permissions and roles assigned, for this purpose 
  *
  * @return \Illuminate\Http\JsonResponse
  */
-public function permissions()
+public function __invoke()
 {
     return auth()->user()->getAllPermissions()->pluck('name');
 }
+```
 
+### Step 2: Add function to RoleController
+
+The frontend needs to know the roles assigned, for this purpose two endpoints are created that return this information.
+> In this case we will use the magic method `__invoke` to send the function call in the routes
+
+```php
 /**
  * Display a listing of roles from current logged user.
  *
  * @return \Illuminate\Http\JsonResponse
  */
-public function roles()
+public function __invoke()
 {
     return auth()->user()->getRoleNames();
 }
@@ -35,8 +43,10 @@ public function roles()
 These two routes should only be accessed when you are authenticated.
 
 ```php
-Route::get('permissions', 'UserController@permissions');
-Route::get('roles', 'UserController@roles');
+Route::namespace('Auth')->group(function () {
+  Route::get('permissions', 'PermissionController');
+  Route::get('roles', 'RoleController');
+});
 ```
 
 ### Step 3: Use plugin
