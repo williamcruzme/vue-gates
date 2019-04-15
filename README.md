@@ -10,7 +10,7 @@ laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) that allows y
 
 Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permissions](https://github.com/spatie/laravel-permission#using-blade-directives).
 
-### Installation
+## Installation
 
 #### yarn
 
@@ -33,7 +33,7 @@ laravel-permissions is also available on these CDNs:
 
 > When using a CDN via script tag, all the exported modules on LaravelPermissions are available on the LaravelPermissions Object.
 
-### Getting Started
+## Getting Started
 
 In your script entry point:
 ```javascript
@@ -45,7 +45,7 @@ Vue.use(LaravelPermissions);
 
 Now you are all setup to use the plugin.
 
-### Usage
+## Usage
 
 Apply the custom directive on your components or DOM elements. Make sure to [read the example](examples).
 
@@ -96,18 +96,18 @@ this.$laravel.getPermissions(); // ['add articles', 'edit articles']
 this.$laravel.getRoles(); // ['admin', 'user', 'writer']
 ```
 
-### Examples
+## Examples
 
 See the [examples and instructions](examples) with Laravel.
 
-### Contributing
+## Contributing
 
 You are welcome to contribute to this project, but before you do, please make sure you read the [contribution guide](CONTRIBUTING.md).
 
-### Credits
+## Credits
 
 - Inspired by Laravel's [permissions syntax](https://github.com/spatie/laravel-permission#using-blade-directives).
 
-### License
+## License
 
 MIT
