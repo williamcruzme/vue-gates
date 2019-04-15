@@ -7,6 +7,7 @@ This is a example for Laravel implementation. This requires [Laravel Permissions
 ### Step 1: Add function to PermissionController
 
 The frontend needs to know the permissions assigned, for this purpose one endpoint are created that return this information.
+
 > In this case we will use the magic method `__invoke` to send the function call in the routes
 
 ```php
@@ -24,6 +25,7 @@ public function __invoke()
 ### Step 2: Add function to RoleController
 
 The frontend needs to know the roles assigned, for this purpose one endpoint are created that return this information.
+
 > In this case we will use the magic method `__invoke` to send the function call in the routes
 
 ```php
@@ -38,7 +40,7 @@ public function __invoke()
 }
 ```
 
-### Step 2: Define routes
+### Step 3: Define routes
 
 These two routes should only be accessed when you are authenticated.
 
@@ -49,22 +51,22 @@ Route::namespace('Auth')->group(function () {
 });
 ```
 
-### Step 3: Use plugin
+### Step 4: Use plugin
 
 The plugin creates an instance of Laravel accessible globally, and at the same time it registers all the directives.
 
 ```js
-import Vue from 'vue';
-import LaravelPermissions from 'laravel-permissions';
+import Vue from "vue";
+import LaravelPermissions from "laravel-permissions";
 
 Vue.use(LaravelPermissions);
 ```
 
-### Step 4: Set permissions and roles
+### Step 5: Set permissions and roles
 
 ```js
-const { data: permissions } = await axios.get('/api/permissions');
-const { data: roles } = await axios.get('/api/roles');
+const { data: permissions } = await axios.get("/api/permissions");
+const { data: roles } = await axios.get("/api/roles");
 
 this.$laravel.setPermissions(permissions);
 this.$laravel.setRoles(roles);
