@@ -80,9 +80,7 @@ Check for all roles:
 
 ```vue
 <button v-can:disabled="'add articles'">Add Article</button>
-```
 
-```vue
 <CustomComponent v-can:customProperty="'add articles'" />
 ```
 
@@ -111,7 +109,7 @@ To synchronize with Laravel you must create an endpoint that returns permissions
  */
 public function permissions()
 {
-	return auth()->user()->getAllPermissions()->pluck('name');
+    return auth()->user()->getAllPermissions()->pluck('name');
 }
 
 /**
@@ -121,7 +119,7 @@ public function permissions()
  */
 public function roles()
 {
-	return auth()->user()->getRoleNames();
+    return auth()->user()->getRoleNames();
 }
 ```
 
@@ -135,7 +133,7 @@ Route::get('roles', 'UserController@roles');
 
 And set the data returned:
 
-```vue
+```js
 import axios from 'axios';
 
 const { data } = await axios.get('/permissions');
@@ -154,6 +152,6 @@ You are welcome to contribute to this project, but before you do, please make su
 
 - Inspired by Laravel's [permissions syntax](https://github.com/spatie/laravel-permission#using-blade-directives).
 
-### license
+### License
 
 MIT
