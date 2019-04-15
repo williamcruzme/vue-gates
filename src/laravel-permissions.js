@@ -1,5 +1,10 @@
-import isEmpty from 'lodash/isEmpty';
-import startCase from 'lodash/startCase';
+function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}
+
+function startCase(string) {
+  return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
+}
 
 export default {
   install(Vue) {
@@ -123,6 +128,7 @@ export default {
       }
     };
 
+    // Directives
     Vue.directive('permission', { inserted: callFunctionFromDirective });
     Vue.directive('role', { inserted: callFunctionFromDirective });
 
