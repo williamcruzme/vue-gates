@@ -27,7 +27,11 @@ const when = condition => (el, binding) => {
 
 export default {
   install(Vue) {
-    window.Laravel = {};
+    window.Laravel = {
+      ...window.Laravel,
+      permissions: [],
+      roles: [],
+    };
 
     Vue.prototype.$laravel = {
       /*
@@ -36,8 +40,7 @@ export default {
       |-------------------------------------------------------------------------
       |
       | These functions controls the "permissions" and "roles" provided
-      | by Laravel Permissions, or from a custom array. This plugin
-      | is not working when "permissions" or "roles" is not defined.
+      | by Laravel Permissions, or from a custom array.
       |
       */
 
