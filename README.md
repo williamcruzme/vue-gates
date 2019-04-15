@@ -47,7 +47,7 @@ Now you are all setup to use the plugin.
 
 ### Usage
 
-Apply the custom directive on your components or DOM elements.
+Apply the custom directive on your components or DOM elements. Make sure to [read the example](examples).
 
 #### Directives
 
@@ -96,59 +96,15 @@ this.$laravel.getPermissions(); // ['add articles', 'edit articles']
 this.$laravel.getRoles(); // ['admin', 'user', 'writer']
 ```
 
-### Usage with Laravel
+### Examples
 
-To synchronize with Laravel you must create an endpoint that returns permissions and roles, or create an [append attribute](https://laravel.com/docs/5.8/eloquent-serialization#appending-values-to-json) in User Model.
-
-*UserController.php*
-```php
-/**
- * Display a listing of permissions from current logged user.
- *
- * @return \Illuminate\Http\JsonResponse
- */
-public function permissions()
-{
-    return auth()->user()->getAllPermissions()->pluck('name');
-}
-
-/**
- * Display a listing of roles from current logged user.
- *
- * @return \Illuminate\Http\JsonResponse
- */
-public function roles()
-{
-    return auth()->user()->getRoleNames();
-}
-```
-
-Add the GET endpoint to return the permissions and roles.
-
-*api.php*
-```php
-Route::get('permissions', 'UserController@permissions');
-Route::get('roles', 'UserController@roles');
-```
-
-And set the data returned:
-
-```js
-import axios from 'axios';
-
-const { data } = await axios.get('/permissions');
-this.$laravel.setPermissions(data);
-
-const { data } = await axios.get('/roles');
-this.$laravel.setRoles(data);
-```
+See the [examples and instructions](examples) with Laravel.
 
 ### Contributing
 
 You are welcome to contribute to this project, but before you do, please make sure you read the [contribution guide](CONTRIBUTING.md).
 
 ### Credits
-
 
 - Inspired by Laravel's [permissions syntax](https://github.com/spatie/laravel-permission#using-blade-directives).
 
