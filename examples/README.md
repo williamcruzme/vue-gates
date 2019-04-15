@@ -6,7 +6,7 @@ This is a example for Laravel implementation. This requires [Laravel Permissions
 
 ### Step 1: Add function to PermissionController
 
-The frontend needs to know the permissions and roles assigned, for this purpose two endpoints are created that return this information.
+The frontend needs to know the permissions assigned, for this purpose one endpoint are created that return this information.
 > In this case we will use the magic method `__invoke` to send the function call in the routes
 
 ```php
@@ -23,7 +23,7 @@ public function __invoke()
 
 ### Step 2: Add function to RoleController
 
-The frontend needs to know the roles assigned, for this purpose two endpoints are created that return this information.
+The frontend needs to know the roles assigned, for this purpose one endpoint are created that return this information.
 > In this case we will use the magic method `__invoke` to send the function call in the routes
 
 ```php
