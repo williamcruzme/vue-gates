@@ -104,7 +104,7 @@ Check for all roles:
 Check for unless role:
 
 ```vue
-<p v-role:unless="'admin'">You are not an Admin!</p>
+<p v-role:unless="'super'">You are not an Super Admin!</p>
 ```
 
 #### Working with attributes
