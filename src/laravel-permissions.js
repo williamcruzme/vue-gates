@@ -5,16 +5,13 @@ const when = condition => (el, binding) => {
     return;
   }
 
-  // Get property name based on directive name
-  const property = binding.name === 'can' ? 'permissions' : 'roles';
-
   // Only allow this function to be run if the Laravel instance exists
-  if (!window.Laravel || !Object.prototype.hasOwnProperty.call(window.Laravel, property)) {
+  if (!window.Laravel) {
     return;
   }
 
   // Check if value exists in property value
-  if (!condition(window.Laravel[property], binding.value)) {
+  if (!condition(binding.value)) {
     if (!binding.arg) {
       // Remove DOM Element
       el.parentNode.removeChild(el);
@@ -64,28 +61,46 @@ export default {
 
       getPermissions: () => window.Laravel.permissions,
       getRoles: () => window.Laravel.roles,
+
+      /*
+      |-------------------------------------------------------------------------
+      | Directives
+      |-------------------------------------------------------------------------
+      |
+      | These is a group of functions for Vue Directives.
+      | This is useful when you want valid a "permission" or "role"
+      | programmatically.
+      |
+      */
+
+      can: permission => window.Laravel.permissions.includes(permission),
+      role: role => window.Laravel.roles.includes(role),
+
+      hasAnyRole: (values) => {
+        const roles = values.split('|');
+        return roles.some(role => window.Laravel.roles.includes(role));
+      },
+
+      hasAllRoles: (values) => {
+        const roles = values.split('|');
+        return roles.every(role => window.Laravel.roles.includes(role));
+      },
     };
 
     Vue.directive('can', {
-      inserted: when((permissions, permission) => permissions.includes(permission)),
+      inserted: when(Vue.prototype.$laravel.can),
     });
 
     Vue.directive('role', {
-      inserted: when((roles, role) => roles.includes(role)),
+      inserted: when(Vue.prototype.$laravel.role),
     });
 
     Vue.directive('hasanyrole', {
-      inserted: when((current, value) => {
-        const values = value.split('|');
-        return values.some(value => current.includes(value));
-      }),
+      inserted: when(Vue.prototype.$laravel.hasAnyRole),
     });
 
     Vue.directive('hasallroles', {
-      inserted: when((current, value) => {
-        const values = value.split('|');
-        return values.every(value => current.includes(value));
-      }),
+      inserted: when(Vue.prototype.$laravel.hasAllRoles),
     });
   },
 };
