@@ -44,11 +44,11 @@ export default {
     };
 
     Vue.directive('can', {
-      inserted: when((current, value) => current.includes(value)),
+      inserted: when((permissions, permission) => permissions.includes(permission)),
     });
 
     Vue.directive('role', {
-      inserted: when((current, value) => current.includes(value)),
+      inserted: when((roles, role) => roles.includes(role)),
     });
 
     Vue.directive('hasanyrole', {
