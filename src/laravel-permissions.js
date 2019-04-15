@@ -1,26 +1,5 @@
-// Apply directive when condition is true
-const when = condition => (el, binding) => {
-  if (!binding.value) {
-    console.error('You must specify a value in the directive.');
-    return;
-  }
-
-  // Only allow this function to be run if the Laravel instance exists
-  if (!window.Laravel) {
-    return;
-  }
-
-  // Check if value exists in property value
-  if (!condition(binding.value)) {
-    if (!binding.arg) {
-      // Remove DOM Element
-      el.parentNode.removeChild(el);
-    } else {
-      // Set 'true' custom property
-      el[binding.arg] = true;
-    }
-  }
-};
+import isEmpty from 'lodash/isEmpty';
+import startCase from 'lodash/startCase';
 
 export default {
   install(Vue) {
@@ -73,25 +52,25 @@ export default {
       |
       */
 
-      can: permission => window.Laravel.permissions.includes(permission),
-      hasRole: role => window.Laravel.roles.includes(role),
-
-      unlessPermission: permission => !Vue.prototype.$laravel.can(permission),
-      unlessRole: role => !Vue.prototype.$laravel.hasRole(role),
+      hasPermission: permission => window.Laravel.permissions.includes(permission),
+      unlessPermission: permission => !Vue.prototype.$laravel.hasPermission(permission),
 
       hasAnyPermission: (values) => {
         const permissions = values.split('|');
         return permissions.some(permission => window.Laravel.permissions.includes(permission));
       },
 
-      hasAnyRole: (values) => {
-        const roles = values.split('|');
-        return roles.some(role => window.Laravel.roles.includes(role));
-      },
-
       hasAllPermissions: (values) => {
         const permissions = values.split('|');
         return permissions.every(permission => window.Laravel.permissions.includes(permission));
+      },
+
+      hasRole: role => window.Laravel.roles.includes(role),
+      unlessRole: role => !Vue.prototype.$laravel.hasRole(role),
+
+      hasAnyRole: (values) => {
+        const roles = values.split('|');
+        return roles.some(role => window.Laravel.roles.includes(role));
       },
 
       hasAllRoles: (values) => {
@@ -100,36 +79,51 @@ export default {
       },
     };
 
-    Vue.directive('can', {
-      inserted: when(Vue.prototype.$laravel.can),
-    });
+    // Normalize directive and call specific function
+    const callFunctionFromDirective = (el, binding) => {
+      if (!binding.value) {
+        console.error('You must specify a value in the directive.');
+        return;
+      }
 
-    Vue.directive('role', {
-      inserted: when(Vue.prototype.$laravel.hasRole),
-    });
+      // Only allow this function to be run if the Laravel instance exists
+      if (!window.Laravel) {
+        return;
+      }
 
-    Vue.directive('unlesspermission', {
-      inserted: when(Vue.prototype.$laravel.unlessPermission),
-    });
+      // Get property to validate
+      let suffix = binding.name;
+      let arg = 'has';
 
-    Vue.directive('unlessrole', {
-      inserted: when(Vue.prototype.$laravel.unlessRole),
-    });
+      if (binding.arg) {
+        if (binding.arg === 'unless') {
+          arg = 'unless';
+        } else if (binding.arg !== 'has') {
+          arg += startCase(binding.arg);
+        }
+      }
 
-    Vue.directive('hasanypermission', {
-      inserted: when(Vue.prototype.$laravel.hasAnyPermission),
-    });
+      // Convert to plural if is needed
+      if (arg === 'hasAll') {
+        suffix += 's';
+      }
 
-    Vue.directive('hasanyrole', {
-      inserted: when(Vue.prototype.$laravel.hasAnyRole),
-    });
+      // Get name of function to call
+      const functionName = `${arg}${startCase(suffix)}`;
 
-    Vue.directive('hasallpermissions', {
-      inserted: when(Vue.prototype.$laravel.hasAllPermissions),
-    });
+      // Check if value exists in property value
+      if (!Vue.prototype.$laravel[functionName](binding.value)) {
+        if (isEmpty(binding.modifiers)) {
+          // Remove DOM Element
+          el.parentNode.removeChild(el);
+        } else {
+          // Set modifiers on DOM element
+          Object.assign(el, binding.modifiers);
+        }
+      }
+    };
 
-    Vue.directive('hasallroles', {
-      inserted: when(Vue.prototype.$laravel.hasAllRoles),
-    });
+    Vue.directive('permission', { inserted: callFunctionFromDirective });
+    Vue.directive('role', { inserted: callFunctionFromDirective });
   },
 };

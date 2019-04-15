@@ -3,12 +3,13 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536)](https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade)
 [![npm](https://img.shields.io/npm/v/laravel-permissions.svg)](https://www.npmjs.com/package/laravel-permissions)
+[![npm](https://img.shields.io/npm/l/laravel-permissions.svg)](LICENSE)
 
 <br>
 
 laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) that allows you to use [Laravel Permissions](https://github.com/spatie/laravel-permission) in your components.
 
-Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permissions](https://github.com/spatie/laravel-permission#using-blade-directives).
+Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permissions](https://github.com/spatie/laravel-permission#using-blade-directives), and EXTRA MORE!.
 
 ## Installation
 
@@ -49,13 +50,35 @@ Now you are all setup to use the plugin.
 
 Apply the custom directive on your components or DOM elements. Make sure to [read the example](examples).
 
-#### Directives
+### Directives
+
+#### Permissions
 
 Check for a specific permission:
 
 ```vue
-<button v-can="'add articles'">Add Article</button>
+<button v-permission="'add articles'">Add Article</button>
 ```
+
+Check for any permission in a list:
+
+```vue
+<button v-permission:any="'add articles|edit articles'">Configure</button>
+```
+
+Check for all permissions:
+
+```vue
+<button v-permission:all="'add articles|edit articles'">Configure</button>
+```
+
+Check for unless permission:
+
+```vue
+<p v-permission:unless="'add article'">You dont have permission!</p>
+```
+
+#### Roles
 
 Check for a specific role:
 
@@ -66,23 +89,32 @@ Check for a specific role:
 Check for any role in a list:
 
 ```vue
-<button v-hasanyrole="'writer|admin'">Add Article</button>
+<button v-role:any="'writer|admin'">Add Article</button>
 ```
 
 Check for all roles:
 
 ```vue
-<button v-hasallroles="'writer|user'">Add Article</button>
+<button v-role:all="'writer|user'">Add Article</button>
 ```
-#### Working with custom properties
 
- You can also set True to any property if the condition is not met.
+Check for unless role:
 
 ```vue
-<button v-can:disabled="'add articles'">Add Article</button>
-
-<CustomComponent v-can:customProperty="'add articles'" />
+<p v-role:unless="'admin'">You are not an Admin!</p>
 ```
+
+#### Working with attributes
+
+ You can also set True to any attribute of DOM element if the condition is not met. You can set multiple attributes.
+
+```vue
+<button v-permission:has.disabled="'add articles'">Add Article</button>
+
+<input v-role:any.required.autofocus="'admin|super admin'" />
+```
+
+### Methods
 
 #### Set permissions and roles
 
@@ -94,6 +126,22 @@ this.$laravel.setRoles(['admin', 'user', 'writer']);
 
 this.$laravel.getPermissions(); // ['add articles', 'edit articles']
 this.$laravel.getRoles(); // ['admin', 'user', 'writer']
+```
+
+#### Directives as functions
+
+You can also use the custom directives as functions.
+
+```js
+this.$laravel.hasPermission('add articles'); // True
+this.$laravel.unlessPermission('add articles'); // False
+this.$laravel.hasAnyPermission('add articles|edit articles'); // True
+this.$laravel.hasAllPermissions('add articles|edit articles'); // True
+
+this.$laravel.hasRole('admin'); // True
+this.$laravel.unlessRole('admin'); // False
+this.$laravel.hasAnyRole('admin|writer'); // True
+this.$laravel.hasAllRoles('admin|writer'); // True
 ```
 
 ## Examples
