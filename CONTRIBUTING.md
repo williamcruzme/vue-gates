@@ -20,8 +20,9 @@ yarn
 
 As you can see we have:
 
-- `src` contains the working code for the repository.
 - `dist`: contains the unminified and the minified build of the repository.
+- `examples`: contains the examples for Laravel implementation.
+- `src`: contains the working code for the repository.
 
 ### Issues
 
