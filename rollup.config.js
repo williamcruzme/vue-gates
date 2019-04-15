@@ -4,14 +4,14 @@ export default {
   input: 'src/laravel-permissions.js',
   output: [
     {
+      name: 'LaravelPermissions',
       file: 'dist/laravel-permissions.js',
       format: 'umd',
     },
     {
-      name: 'LaravelPermissions',
       file: 'dist/laravel-permissions.min.js',
       format: 'cjs',
-    }
+    },
   ],
   plugins: [
     babel({
