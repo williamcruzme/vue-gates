@@ -20,10 +20,7 @@ yarn
 
 As you can see we have:
 
-- `src` contains the working code for the repository:
-  - `core`: contains files that are the
-  - `rules`: contains validation rules that are available to the validator instances.
-  - `utils`: contains commonly used utility functions.
+- `src` contains the working code for the repository.
 - `dist`: contains the unminified and the minified build of the repository.
 
 ### Issues
