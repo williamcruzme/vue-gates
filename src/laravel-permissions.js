@@ -1,14 +1,15 @@
 // Apply directive when condition is true
-const when = (condition) => (el, binding) => {
+const when = condition => (el, binding) => {
   if (!binding.value) {
-    return console.error('You must specify a value in the directive.');
+    console.error('You must specify a value in the directive.');
+    return;
   }
 
   // Get property name based on directive name
   const property = binding.name === 'can' ? 'permissions' : 'roles';
 
   // Only allow this function to be run if the Laravel instance exists
-  if (!window.Laravel || !window.Laravel.hasOwnProperty(property)) {
+  if (!window.Laravel || !Object.prototype.hasOwnProperty.call(window.Laravel, property)) {
     return;
   }
 
@@ -25,7 +26,7 @@ const when = (condition) => (el, binding) => {
 };
 
 export default {
-  install(Vue, _options) {
+  install(Vue) {
     window.Laravel = {};
 
     Vue.prototype.$laravel = {
@@ -63,5 +64,5 @@ export default {
         return values.every(value => current.includes(value));
       }),
     });
-  }
+  },
 };
