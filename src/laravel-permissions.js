@@ -1,10 +1,4 @@
-function isEmpty(obj) {
-  return Object.keys(obj).length === 0;
-}
-
-function startCase(string) {
-  return `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
-}
+import { isConditionPassed } from './utils';
 
 export default {
   install(Vue) {
@@ -57,6 +51,7 @@ export default {
       |
       */
 
+      // Permissions
       hasPermission: permission => window.Laravel.permissions.includes(permission),
       unlessPermission: permission => !Vue.prototype.$laravel.hasPermission(permission),
 
@@ -70,6 +65,7 @@ export default {
         return permissions.every(permission => window.Laravel.permissions.includes(permission));
       },
 
+      // Roles
       hasRole: role => window.Laravel.roles.includes(role),
       unlessRole: role => !Vue.prototype.$laravel.hasRole(role),
 
@@ -84,53 +80,9 @@ export default {
       },
     };
 
-    // Normalize directive and call specific function
-    const callFunctionFromDirective = (el, binding) => {
-      if (!binding.value) {
-        console.error('You must specify a value in the directive.');
-        return;
-      }
-
-      // Only allow this function to be run if the Laravel instance exists
-      if (!window.Laravel) {
-        return;
-      }
-
-      // Get property to validate
-      let suffix = binding.name;
-      let arg = 'has';
-
-      if (binding.arg) {
-        if (binding.arg === 'unless') {
-          arg = 'unless';
-        } else if (binding.arg !== 'has') {
-          arg += startCase(binding.arg);
-        }
-      }
-
-      // Convert to plural if is needed
-      if (arg === 'hasAll') {
-        suffix += 's';
-      }
-
-      // Get name of function to call
-      const functionName = `${arg}${startCase(suffix)}`;
-
-      // Check if value exists in property value
-      if (!Vue.prototype.$laravel[functionName](binding.value)) {
-        if (isEmpty(binding.modifiers)) {
-          // Remove DOM Element
-          el.parentNode.removeChild(el);
-        } else {
-          // Set modifiers on DOM element
-          Object.assign(el, binding.modifiers);
-        }
-      }
-    };
-
     // Directives
-    Vue.directive('permission', { inserted: callFunctionFromDirective });
-    Vue.directive('role', { inserted: callFunctionFromDirective });
+    Vue.directive('permission', { inserted: isConditionPassed(Vue) });
+    Vue.directive('role', { inserted: isConditionPassed(Vue) });
 
     // Alias for "v-permission:has"
     Vue.directive('can', {
