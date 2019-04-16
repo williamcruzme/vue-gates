@@ -56,8 +56,8 @@ Route::namespace('Auth')->group(function () {
 The plugin creates an instance of Laravel accessible globally, and at the same time it registers all the directives.
 
 ```js
-import Vue from "vue";
-import LaravelPermissions from "laravel-permissions";
+import Vue from 'vue';
+import LaravelPermissions from 'laravel-permissions';
 
 Vue.use(LaravelPermissions);
 ```
@@ -65,8 +65,8 @@ Vue.use(LaravelPermissions);
 ### Step 5: Set permissions and roles
 
 ```js
-const { data: permissions } = await axios.get("/api/permissions");
-const { data: roles } = await axios.get("/api/roles");
+const { data: permissions } = await axios.get('/api/permissions');
+const { data: roles } = await axios.get('/api/roles');
 
 this.$laravel.setPermissions(permissions);
 this.$laravel.setRoles(roles);
