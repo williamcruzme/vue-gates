@@ -30,7 +30,7 @@ npm i laravel-permissions --save
 
 laravel-permissions is also available on these CDNs:
 
-- [jsdelivr](https://cdn.jsdelivr.net/npm/laravel-permissions@latest/dist/laravel-permissions.min.js)
+- [jsdelivr](https://cdn.jsdelivr.net/npm/laravel-permissions@latest/dist/laravel-permissions.js)
 - [unpkg](https://unpkg.com/laravel-permissions)
 
 > When using a CDN via script tag, all the exported modules on LaravelPermissions are available on the LaravelPermissions Object.
