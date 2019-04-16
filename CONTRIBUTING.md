@@ -22,7 +22,8 @@ As you can see we have:
 
 - `dist`: contains the unminified and the minified build of the repository.
 - `examples`: contains the examples for Laravel implementation.
-- `src`: contains the working code for the repository.
+- `src` contains the working code for the repository:
+  - `utils`: contains commonly used utility functions.
 
 ### Issues
 
