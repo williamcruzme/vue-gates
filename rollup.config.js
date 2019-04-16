@@ -1,25 +1,18 @@
+import { uglify } from 'rollup-plugin-uglify';
 import babel from 'rollup-plugin-babel';
 
 export default {
   input: 'src/laravel-permissions.js',
-  output: [
-    {
-      name: 'LaravelPermissions',
-      file: 'dist/laravel-permissions.js',
-      format: 'umd',
-    },
-    {
-      file: 'dist/laravel-permissions.min.js',
-      format: 'cjs',
-    },
-    {
-      file: 'dist/laravel-permissions.esm.js',
-      format: 'esm',
-    },
-  ],
+  output: {
+    name: 'LaravelPermissions',
+    env: 'production',
+    format: 'umd',
+    file: 'dist/laravel-permissions.js',
+  },
   plugins: [
     babel({
       exclude: 'node_modules/**',
     }),
+    uglify(),
   ],
 };
