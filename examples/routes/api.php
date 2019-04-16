@@ -11,5 +11,7 @@
 |
 */
 
-Route::get('permissions', 'UserController@permissions');
-Route::get('roles', 'UserController@roles');
+Route::namespace('Auth')->group(function () {
+    Route::get('permissions', 'PermissionController')->name('permission');
+    Route::get('roles', 'RoleController')->name('roles');
+});
