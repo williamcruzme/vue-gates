@@ -1,5 +1,5 @@
 
-# Laravel Permissions
+# Laravel Permissions for Vue.js
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536)](https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade)
 [![npm](https://img.shields.io/npm/v/laravel-permissions.svg)](https://www.npmjs.com/package/laravel-permissions)
