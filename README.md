@@ -1,18 +1,21 @@
 
-# Laravel Permissions for Vue.js
+<h1 align="center" style="text-align:center">Laravel Permissions for Vue.js & Nuxt.js</h1>
 
+<p align="center">
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536)](https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade)
 [![npm](https://img.shields.io/npm/v/laravel-permissions.svg)](https://www.npmjs.com/package/laravel-permissions)
+[![vue](https://badgen.net/badge/Vue/2.x/orange)](https://vuejs.org/)
 [![npm](https://img.shields.io/npm/dt/laravel-permissions.svg)](https://www.npmjs.com/package/laravel-permissions)
 [![npm](https://img.shields.io/npm/l/laravel-permissions.svg)](LICENSE)
+</p>
 
 <br>
 
-laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) that allows you to use [Laravel Permissions](https://github.com/spatie/laravel-permission) in your components.
+laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use [Laravel Permissions](https://github.com/spatie/laravel-permission) in your components.
 
 Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permissions](https://github.com/spatie/laravel-permission#using-blade-directives), and EXTRA MORE!.
 
-## Installation
+## 💿 Installation
 
 #### yarn
 
@@ -35,7 +38,7 @@ laravel-permissions is also available on these CDNs:
 
 > When using a CDN via script tag, all the exported modules on LaravelPermissions are available on the LaravelPermissions Object.
 
-## Getting Started
+## 🏁 Getting Started
 
 In your script entry point:
 ```javascript
@@ -45,9 +48,28 @@ import LaravelPermissions from 'laravel-permissions';
 Vue.use(LaravelPermissions);
 ```
 
+Or in your Nuxt.js project 🎉:
+
+**1. Create plugin:**
+```js
+// ~/plugins/laravel-permissions.js
+import Vue from 'vue';
+import LaravelPermissions from 'laravel-permissions';
+
+Vue.use(LaravelPermissions);
+```
+
+**2. Then register it:**
+```js
+// nuxt.config.js
+export default {
+  plugins: ['~/plugins/laravel-permissions']
+}
+```
+
 Now you are all setup to use the plugin.
 
-## Usage
+## 🚀 Usage
 
 Apply the custom directive on your components or DOM elements. Make sure to [read the example](examples).
 
@@ -148,18 +170,18 @@ this.$laravel.hasAnyRole('admin|writer'); // True
 this.$laravel.hasAllRoles('admin|writer'); // True
 ```
 
-## Examples
+## ✅ Examples
 
 See the [examples and instructions](examples) with Laravel.
 
-## Contributing
+## 🚸 Contributing
 
 You are welcome to contribute to this project, but before you do, please make sure you read the [contribution guide](CONTRIBUTING.md).
 
-## Credits
+## 🙈 Credits
 
 - Inspired by Laravel's [permissions syntax](https://github.com/spatie/laravel-permission#using-blade-directives).
 
-## License
+## 🔒 License
 
 MIT
