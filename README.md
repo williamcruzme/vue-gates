@@ -2,11 +2,11 @@
 <h1 align="center" style="text-align:center">Laravel Permissions for Vue.js & Nuxt.js</h1>
 
 <p align="center">
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536)](https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade)
-[![npm](https://img.shields.io/npm/v/laravel-permissions.svg)](https://www.npmjs.com/package/laravel-permissions)
-[![vue](https://badgen.net/badge/Vue/2.x/orange)](https://vuejs.org/)
-[![npm](https://img.shields.io/npm/dt/laravel-permissions.svg)](https://www.npmjs.com/package/laravel-permissions)
-[![npm](https://img.shields.io/npm/l/laravel-permissions.svg)](LICENSE)
+  <a href="https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536" alt="Codacy Badge"></a>
+  <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/v/laravel-permissions.svg" alt="Version"></a>
+  <a href="https://vuejs.org/"><img src="https://badgen.net/badge/Vue/2.x/orange" alt="Vue"></a>
+  <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/dw/laravel-permissions.svg" alt="Downloads"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/npm/l/laravel-permissions.svg" alt="License"></a>
 </p>
 
 <br>
