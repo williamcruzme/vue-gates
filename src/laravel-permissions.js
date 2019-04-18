@@ -2,8 +2,7 @@ import { isConditionPassed } from './utils';
 
 export default {
   install(Vue) {
-    window.Laravel = {
-      ...window.Laravel,
+    const Laravel = {
       permissions: [],
       roles: [],
     };
@@ -20,11 +19,11 @@ export default {
       */
 
       setPermissions: (permissions) => {
-        window.Laravel.permissions = permissions;
+        Laravel.permissions = permissions;
       },
 
       setRoles: (roles) => {
-        window.Laravel.roles = roles;
+        Laravel.roles = roles;
       },
 
       /*
@@ -37,8 +36,8 @@ export default {
       |
       */
 
-      getPermissions: () => window.Laravel.permissions,
-      getRoles: () => window.Laravel.roles,
+      getPermissions: () => Laravel.permissions,
+      getRoles: () => Laravel.roles,
 
       /*
       |-------------------------------------------------------------------------
@@ -52,31 +51,31 @@ export default {
       */
 
       // Permissions
-      hasPermission: permission => window.Laravel.permissions.includes(permission),
+      hasPermission: permission => Laravel.permissions.includes(permission),
       unlessPermission: permission => !Vue.prototype.$laravel.hasPermission(permission),
 
       hasAnyPermission: (values) => {
         const permissions = values.split('|');
-        return permissions.some(permission => window.Laravel.permissions.includes(permission));
+        return permissions.some(permission => Laravel.permissions.includes(permission));
       },
 
       hasAllPermissions: (values) => {
         const permissions = values.split('|');
-        return permissions.every(permission => window.Laravel.permissions.includes(permission));
+        return permissions.every(permission => Laravel.permissions.includes(permission));
       },
 
       // Roles
-      hasRole: role => window.Laravel.roles.includes(role),
+      hasRole: role => Laravel.roles.includes(role),
       unlessRole: role => !Vue.prototype.$laravel.hasRole(role),
 
       hasAnyRole: (values) => {
         const roles = values.split('|');
-        return roles.some(role => window.Laravel.roles.includes(role));
+        return roles.some(role => Laravel.roles.includes(role));
       },
 
       hasAllRoles: (values) => {
         const roles = values.split('|');
-        return roles.every(role => window.Laravel.roles.includes(role));
+        return roles.every(role => Laravel.roles.includes(role));
       },
     };
 

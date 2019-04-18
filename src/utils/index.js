@@ -28,11 +28,6 @@ export const isConditionPassed = Vue => (el, binding) => {
     return;
   }
 
-  // Only allow this function to be run if the Laravel instance exists
-  if (!window.Laravel) {
-    return;
-  }
-
   // Get condition to call
   const condition = getCondition(binding);
 
