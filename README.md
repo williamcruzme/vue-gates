@@ -46,6 +46,8 @@ import Vue from 'vue';
 import LaravelPermissions from 'laravel-permissions';
 
 Vue.use(LaravelPermissions);
+// OR
+Vue.use(LaravelPermissions, { persistent: true });
 ```
 
 Or in your Nuxt.js project 🎉:
@@ -57,6 +59,8 @@ import Vue from 'vue';
 import LaravelPermissions from 'laravel-permissions';
 
 Vue.use(LaravelPermissions);
+// OR
+Vue.use(LaravelPermissions, { persistent: true });
 ```
 
 **2. Then register it:**

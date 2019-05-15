@@ -1,10 +1,14 @@
 import { isConditionPassed } from './utils';
 
 export default {
-  install(Vue) {
+  install(Vue, { persistent = false }) {
+    const canPersistent = persistent && process.browser;
+    const permissions = canPersistent ? JSON.parse(localStorage.getItem('permissions')) : [];
+    const roles = canPersistent ? JSON.parse(localStorage.getItem('roles')) : [];
+
     const Laravel = {
-      permissions: [],
-      roles: [],
+      permissions: permissions || [],
+      roles: roles || [],
     };
 
     Vue.prototype.$laravel = {
@@ -20,10 +24,16 @@ export default {
 
       setPermissions: (permissions) => {
         Laravel.permissions = permissions;
+        if (canPersistent) {
+          localStorage.setItem('permissions', JSON.stringify(permissions));
+        }
       },
 
       setRoles: (roles) => {
         Laravel.roles = roles;
+        if (canPersistent) {
+          localStorage.setItem('roles', JSON.stringify(roles));
+        }
       },
 
       /*
