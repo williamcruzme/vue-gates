@@ -1,6 +1,6 @@
 {
   "name": "laravel-permissions",
-  "version": "1.5.1",
+  "version": "1.5.2",
   "description": "A Vue.js 2 directive for Laravel Permissions",
   "unpkg": "dist/laravel-permissions.js",
   "main": "dist/laravel-permissions.js",
