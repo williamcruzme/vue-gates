@@ -1,7 +1,7 @@
 import { isConditionPassed } from './utils';
 
 export default {
-  install(Vue, option) {
+  install(Vue, option = {}) {
     const canPersistent = option.persistent && process.browser;
     const permissions = canPersistent ? JSON.parse(localStorage.getItem('permissions')) : [];
     const roles = canPersistent ? JSON.parse(localStorage.getItem('roles')) : [];
