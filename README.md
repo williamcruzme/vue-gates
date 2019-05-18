@@ -134,6 +134,22 @@ Check for unless role:
 <p v-role:unless="'super'">You are not an Super Admin!</p>
 ```
 
+#### Roles & Permissions
+
+Check for role and permission:
+
+```vue
+<button v-role="'writer'" v-permission="'add articles'">Add Article</button>
+
+<!-- You can use any combination of directives -->
+```
+
+Check for role or permission:
+
+```vue
+<button v-role-or-permission="'super|add articles'">Add Article</button>
+```
+
 #### Working with attributes
 
  You can also set True to any attribute of DOM element if the condition is not met. You can set multiple attributes.
