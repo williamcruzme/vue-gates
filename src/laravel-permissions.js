@@ -117,6 +117,7 @@ export default {
     Vue.directive('can', {
       inserted: (el, binding) => {
         if (!Vue.prototype.$laravel.hasPermission(binding.value)) {
+          // Remove DOM Element
           el.parentNode.removeChild(el);
         }
       },
