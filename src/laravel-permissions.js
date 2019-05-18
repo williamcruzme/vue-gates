@@ -92,6 +92,26 @@ export default {
     // Directives
     Vue.directive('permission', { inserted: isConditionPassed(Vue) });
     Vue.directive('role', { inserted: isConditionPassed(Vue) });
+    Vue.directive('role-or-permission', {
+      inserted: (el, binding) => {
+        if (!binding.value) {
+          console.error('You must specify a value in the directive.');
+          return;
+        }
+
+        const options = binding.value.split('|');
+        const role = options[0];
+        const permission = options[1];
+
+        if (
+          !Vue.prototype.$laravel.hasRole(role)
+          && !Vue.prototype.$laravel.hasPermission(permission)
+        ) {
+          // Remove DOM Element
+          el.parentNode.removeChild(el);
+        }
+      },
+    });
 
     // Alias for "v-permission:has"
     Vue.directive('can', {
