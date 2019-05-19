@@ -1,5 +1,5 @@
 
-<h1 align="center" style="text-align:center">Laravel Permissions for Vue.js & Nuxt.js</h1>
+<h1 align="center" style="text-align:center">Laravel Permission for Vue.js & Nuxt.js</h1>
 
 <p align="center">
   <a href="https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536" alt="Codacy Badge"></a>
@@ -13,7 +13,7 @@
 
 laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use [Laravel Permissions](https://github.com/spatie/laravel-permission) in your components.
 
-Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permissions](https://github.com/spatie/laravel-permission#using-blade-directives), and EXTRA MORE!.
+Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permission](https://github.com/spatie/laravel-permission#using-blade-directives), and EXTRA MORE!.
 
 ## 💿 Installation
 
@@ -200,7 +200,7 @@ You are welcome to contribute to this project, but before you do, please make su
 
 ## 🙈 Credits
 
-- Inspired by Laravel's [permissions syntax](https://github.com/spatie/laravel-permission#using-blade-directives).
+- Inspired by Laravel Permission [syntax](https://github.com/spatie/laravel-permission#using-blade-directives).
 
 ## 🔒 License
 
