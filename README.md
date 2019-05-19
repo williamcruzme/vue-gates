@@ -11,7 +11,7 @@
 
 <br>
 
-laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use [Laravel Permissions](https://github.com/spatie/laravel-permission) in your components.
+laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use [Laravel Permission](https://github.com/spatie/laravel-permission) in your components.
 
 Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permission](https://github.com/spatie/laravel-permission#using-blade-directives), and EXTRA MORE!.
 
