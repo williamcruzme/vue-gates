@@ -65,11 +65,14 @@ Vue.use(LaravelPermissions);
 ### Step 5: Set permissions and roles
 
 ```js
-const { data: permissions } = axios.get('/api/permissions');
-const { data: roles } = axios.get('/api/roles');
+const permissionsRequest = axios.get('/api/permissions');
+const rolesRequest = axios.get('/api/roles');
 
-this.$laravel.setPermissions(await permissions);
-this.$laravel.setRoles(await roles);
+const { data: permissions } = await permissionsRequest;
+const { data: roles } = await rolesRequest;
+
+this.$laravel.setPermissions(permissions);
+this.$laravel.setRoles(roles);
 ```
 
 ### Finish!
