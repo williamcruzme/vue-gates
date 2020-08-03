@@ -9,6 +9,7 @@ export default {
     const Gate = {
       permissions: permissions || [],
       roles: roles || [],
+      superRole: option.superRole,
     };
 
     Vue.prototype.$gate = {
@@ -48,6 +49,7 @@ export default {
 
       getPermissions: () => Gate.permissions,
       getRoles: () => Gate.roles,
+      isSuperUser: () => Gate.superRole && Gate.roles.includes(Gate.superRole),
 
       /*
       |-------------------------------------------------------------------------

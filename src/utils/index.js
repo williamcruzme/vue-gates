@@ -28,6 +28,12 @@ export const isConditionPassed = Vue => (el, binding) => {
     return;
   }
 
+  // Check if it's a superuser.
+  const isSuperUser = Vue.prototype.$gate.isSuperUser();
+  if (isSuperUser) {
+    return;
+  }
+
   // Get condition to validate
   const condition = getCondition(binding);
 
