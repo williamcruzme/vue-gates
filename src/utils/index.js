@@ -3,7 +3,7 @@ export const isEmpty = obj => Object.keys(obj).length === 0;
 export const startCase = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
 export const getCondition = (binding) => {
-  let suffix = binding.name;
+  let suffix = binding.name === 'can' ? 'permission' : binding.name;
   let arg = 'has';
 
   if (binding.arg) {
