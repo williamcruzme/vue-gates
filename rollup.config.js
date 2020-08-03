@@ -3,12 +3,12 @@ import babel from 'rollup-plugin-babel';
 import resolve from 'rollup-plugin-node-resolve';
 
 export default {
-  input: 'src/laravel-permissions.js',
+  input: 'src/vue-gates.js',
   output: {
-    name: 'LaravelPermissions',
+    name: 'VueGates',
     env: 'production',
     format: 'umd',
-    file: 'dist/laravel-permissions.js',
+    file: 'dist/vue-gates.js',
   },
   plugins: [
     resolve(),

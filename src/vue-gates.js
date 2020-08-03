@@ -6,31 +6,31 @@ export default {
     const permissions = canPersistent ? JSON.parse(localStorage.getItem('permissions')) : [];
     const roles = canPersistent ? JSON.parse(localStorage.getItem('roles')) : [];
 
-    const Laravel = {
+    const Gate = {
       permissions: permissions || [],
       roles: roles || [],
     };
 
-    Vue.prototype.$laravel = {
+    Vue.prototype.$gate = {
       /*
       |-------------------------------------------------------------------------
       | Setters
       |-------------------------------------------------------------------------
       |
       | These functions controls the "permissions" and "roles" provided
-      | by Laravel Permissions, or from a custom array.
+      | by Vue Gates, or from a custom array.
       |
       */
 
       setPermissions: (permissions) => {
-        Laravel.permissions = permissions;
+        Gate.permissions = permissions;
         if (canPersistent) {
           localStorage.setItem('permissions', JSON.stringify(permissions));
         }
       },
 
       setRoles: (roles) => {
-        Laravel.roles = roles;
+        Gate.roles = roles;
         if (canPersistent) {
           localStorage.setItem('roles', JSON.stringify(roles));
         }
@@ -46,8 +46,8 @@ export default {
       |
       */
 
-      getPermissions: () => Laravel.permissions,
-      getRoles: () => Laravel.roles,
+      getPermissions: () => Gate.permissions,
+      getRoles: () => Gate.roles,
 
       /*
       |-------------------------------------------------------------------------
@@ -61,31 +61,31 @@ export default {
       */
 
       // Permissions
-      hasPermission: permission => Laravel.permissions.includes(permission),
-      unlessPermission: permission => !Vue.prototype.$laravel.hasPermission(permission),
+      hasPermission: permission => Gate.permissions.includes(permission),
+      unlessPermission: permission => !Vue.prototype.$gate.hasPermission(permission),
 
       hasAnyPermission: (values) => {
         const permissions = values.split('|');
-        return permissions.some(permission => Laravel.permissions.includes(permission));
+        return permissions.some(permission => Gate.permissions.includes(permission));
       },
 
       hasAllPermissions: (values) => {
         const permissions = values.split('|');
-        return permissions.every(permission => Laravel.permissions.includes(permission));
+        return permissions.every(permission => Gate.permissions.includes(permission));
       },
 
       // Roles
-      hasRole: role => Laravel.roles.includes(role),
-      unlessRole: role => !Vue.prototype.$laravel.hasRole(role),
+      hasRole: role => Gate.roles.includes(role),
+      unlessRole: role => !Vue.prototype.$gate.hasRole(role),
 
       hasAnyRole: (values) => {
         const roles = values.split('|');
-        return roles.some(role => Laravel.roles.includes(role));
+        return roles.some(role => Gate.roles.includes(role));
       },
 
       hasAllRoles: (values) => {
         const roles = values.split('|');
-        return roles.every(role => Laravel.roles.includes(role));
+        return roles.every(role => Gate.roles.includes(role));
       },
     };
 
@@ -105,8 +105,8 @@ export default {
         const permission = options[1];
 
         if (
-          !Vue.prototype.$laravel.hasRole(role)
-          && !Vue.prototype.$laravel.hasPermission(permission)
+          !Vue.prototype.$gate.hasRole(role)
+          && !Vue.prototype.$gate.hasPermission(permission)
         ) {
           // Remove DOM Element
           el.parentNode.removeChild(el);

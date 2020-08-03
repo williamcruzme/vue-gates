@@ -1,9 +1,9 @@
 {
-  "name": "laravel-permissions",
-  "version": "1.5.3",
-  "description": "A Vue.js 2 directive for Laravel Permissions",
-  "unpkg": "dist/laravel-permissions.js",
-  "main": "dist/laravel-permissions.js",
+  "name": "vue-gates",
+  "version": "2.0.0",
+  "description": "A Vue.js/Nuxt.js package for Permissions/Roles",
+  "unpkg": "dist/vue-gates.js",
+  "main": "dist/vue-gates.js",
   "scripts": {
     "build": "yarn rollup -c",
     "eslint": "eslint src/**",
@@ -12,14 +12,21 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/williamcruzme/laravel-permissions.git"
+    "url": "git+https://github.com/williamcruzme/vue-gates.git"
   },
   "keywords": [
+    "Gates",
     "Laravel",
     "Nuxt.js",
+    "Permission",
     "Permissions",
+    "Role",
+    "Roles",
     "Vue Directive",
-    "Vue.js"
+    "Vue.js",
+    "Vue2",
+    "Vue3",
+    "Vuex"
   ],
   "author": "John Cruz <sv.johncruz@gmail.com>",
   "license": "MIT",
@@ -27,9 +34,9 @@
     "dist"
   ],
   "bugs": {
-    "url": "https://github.com/williamcruzme/laravel-permissions/issues"
+    "url": "https://github.com/williamcruzme/vue-gates/issues"
   },
-  "homepage": "https://github.com/williamcruzme/laravel-permissions#readme",
+  "homepage": "https://github.com/williamcruzme/vue-gates#readme",
   "peerDependencies": {
     "vue": "^2.0.0"
   },

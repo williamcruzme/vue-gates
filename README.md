@@ -1,17 +1,15 @@
 
-<h1 align="center" style="text-align:center">Laravel Permission for Vue.js & Nuxt.js</h1>
+<h1 align="center" style="text-align:center">Vue Gates - Protecting every thing</h1>
 
 <p align="center">
   <a href="https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536" alt="Codacy Badge"></a>
   <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/v/laravel-permissions.svg" alt="Version"></a>
   <a href="https://vuejs.org/"><img src="https://badgen.net/badge/Vue/2.x/orange" alt="Vue"></a>
-  <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/dw/laravel-permissions.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/dm/laravel-permissions.svg" alt="Downloads"></a>
   <a href="LICENSE"><img src="https://img.shields.io/npm/l/laravel-permissions.svg" alt="License"></a>
 </p>
 
-<br>
-
-laravel-permissions is a plugin for [Vue.js 2](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use [Laravel Permission](https://github.com/spatie/laravel-permission) in your components.
+vue-gates is a plugin for [Vue.js](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use [Laravel Permission](https://github.com/spatie/laravel-permission) in your components.
 
 Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permission](https://github.com/spatie/laravel-permission#using-blade-directives), and EXTRA MORE!.
 
@@ -20,18 +18,18 @@ Being blade-based you only need to specify the directive in your components or D
 #### yarn
 
 ```
-yarn add laravel-permissions
+yarn add vue-gates
 ```
 
 #### npm
 
 ```
-npm i laravel-permissions --save
+npm i vue-gates --save
 ```
 
 #### CDN
 
-laravel-permissions is also available on these CDNs:
+vue-gates is also available on these CDNs:
 
 - [jsdelivr](https://cdn.jsdelivr.net/npm/laravel-permissions@latest/dist/laravel-permissions.js)
 - [unpkg](https://unpkg.com/laravel-permissions)
@@ -43,11 +41,11 @@ laravel-permissions is also available on these CDNs:
 In your script entry point:
 ```javascript
 import Vue from 'vue';
-import LaravelPermissions from 'laravel-permissions';
+import VueGates from 'vue-gates';
 
-Vue.use(LaravelPermissions);
+Vue.use(VueGates);
 // OR
-Vue.use(LaravelPermissions, { persistent: true });
+Vue.use(VueGates, { persistent: true });
 ```
 
 Or in your Nuxt.js project 🎉:
@@ -56,18 +54,18 @@ Or in your Nuxt.js project 🎉:
 ```js
 // ~/plugins/laravel-permissions.js
 import Vue from 'vue';
-import LaravelPermissions from 'laravel-permissions';
+import VueGates from 'vue-gates';
 
-Vue.use(LaravelPermissions);
+Vue.use(VueGates);
 // OR
-Vue.use(LaravelPermissions, { persistent: true });
+Vue.use(VueGates, { persistent: true });
 ```
 
 **2. Then register it:**
 ```js
 // nuxt.config.js
 export default {
-  plugins: ['~/plugins/laravel-permissions']
+  plugins: ['~/plugins/vue-gates']
 }
 ```
 
@@ -167,11 +165,11 @@ Check for role or permission:
 This plugin searches the Laravel instance, by default it already creates it but you must define the permissions and roles:
 
 ```js
-this.$laravel.setPermissions(['add articles', 'edit articles']);
-this.$laravel.setRoles(['admin', 'user', 'writer']);
+this.$gate.setPermissions(['add articles', 'edit articles']);
+this.$gate.setRoles(['admin', 'user', 'writer']);
 
-this.$laravel.getPermissions(); // ['add articles', 'edit articles']
-this.$laravel.getRoles(); // ['admin', 'user', 'writer']
+this.$gate.getPermissions(); // ['add articles', 'edit articles']
+this.$gate.getRoles(); // ['admin', 'user', 'writer']
 ```
 
 #### Directives as functions
@@ -179,15 +177,15 @@ this.$laravel.getRoles(); // ['admin', 'user', 'writer']
 You can also use the custom directives as functions.
 
 ```js
-this.$laravel.hasPermission('add articles'); // True
-this.$laravel.unlessPermission('add articles'); // False
-this.$laravel.hasAnyPermission('add articles|edit articles'); // True
-this.$laravel.hasAllPermissions('add articles|edit articles'); // True
+this.$gate.hasPermission('add articles'); // True
+this.$gate.unlessPermission('add articles'); // False
+this.$gate.hasAnyPermission('add articles|edit articles'); // True
+this.$gate.hasAllPermissions('add articles|edit articles'); // True
 
-this.$laravel.hasRole('admin'); // True
-this.$laravel.unlessRole('admin'); // False
-this.$laravel.hasAnyRole('admin|writer'); // True
-this.$laravel.hasAllRoles('admin|writer'); // True
+this.$gate.hasRole('admin'); // True
+this.$gate.unlessRole('admin'); // False
+this.$gate.hasAnyRole('admin|writer'); // True
+this.$gate.hasAllRoles('admin|writer'); // True
 ```
 
 ## ✅ Examples

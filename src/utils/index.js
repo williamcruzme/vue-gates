@@ -28,11 +28,10 @@ export const isConditionPassed = Vue => (el, binding) => {
     return;
   }
 
-  // Get condition to call
+  // Get condition to validate
   const condition = getCondition(binding);
 
-  // Check if value exists in property value
-  if (!Vue.prototype.$laravel[condition](binding.value)) {
+  if (!Vue.prototype.$gate[condition](binding.value)) {
     if (isEmpty(binding.modifiers)) {
       // Remove DOM Element
       el.parentNode.removeChild(el);
