@@ -12,6 +12,6 @@
 */
 
 Route::namespace('Auth')->group(function () {
-    Route::get('permissions', 'PermissionController')->name('permission');
-    Route::get('roles', 'RoleController')->name('roles');
+    Route::get('permissions', 'PermissionController');
+    Route::get('roles', 'RoleController');
 });
