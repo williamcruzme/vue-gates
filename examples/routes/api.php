@@ -11,7 +11,7 @@
 |
 */
 
-Route::namespace('Auth')->group(function () {
+Route::namespace('Auth')->middleware('auth')->group(function () {
     Route::get('permissions', 'PermissionController');
     Route::get('roles', 'RoleController');
 });
