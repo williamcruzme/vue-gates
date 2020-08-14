@@ -2,7 +2,6 @@
 <h1 align="center" style="text-align:center">Vue Gates - Protecting every thing</h1>
 
 <p align="center">
-  <a href="https://www.codacy.com/app/williamcruzme/laravel-permissions?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=williamcruzme/laravel-permissions&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/76f6b99f5836453aa24720f03078f536" alt="Codacy Badge"></a>
   <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/v/laravel-permissions.svg" alt="Version"></a>
   <a href="https://vuejs.org/"><img src="https://badgen.net/badge/Vue/2.x/orange" alt="Vue"></a>
   <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/dm/laravel-permissions.svg" alt="Downloads"></a>
@@ -34,7 +33,7 @@ vue-gates is also available on these CDNs:
 - [jsdelivr](https://cdn.jsdelivr.net/npm/laravel-permissions@latest/dist/laravel-permissions.js)
 - [unpkg](https://unpkg.com/laravel-permissions)
 
-> When using a CDN via script tag, all the exported modules on LaravelPermissions are available on the LaravelPermissions Object.
+> When using a CDN via script tag, all the exported modules on VueGates are available on the VueGates Object.
 
 ## 🏁 Getting Started
 
@@ -165,11 +164,11 @@ Check for role or permission:
 This plugin searches the Laravel instance, by default it already creates it but you must define the permissions and roles:
 
 ```js
-this.$gate.setPermissions(['add articles', 'edit articles']);
-this.$gate.setRoles(['admin', 'user', 'writer']);
+this.$gates.setPermissions(['add articles', 'edit articles']);
+this.$gates.setRoles(['admin', 'user', 'writer']);
 
-this.$gate.getPermissions(); // ['add articles', 'edit articles']
-this.$gate.getRoles(); // ['admin', 'user', 'writer']
+this.$gates.getPermissions(); // ['add articles', 'edit articles']
+this.$gates.getRoles(); // ['admin', 'user', 'writer']
 ```
 
 #### Directives as functions
@@ -177,15 +176,15 @@ this.$gate.getRoles(); // ['admin', 'user', 'writer']
 You can also use the custom directives as functions.
 
 ```js
-this.$gate.hasPermission('add articles'); // True
-this.$gate.unlessPermission('add articles'); // False
-this.$gate.hasAnyPermission('add articles|edit articles'); // True
-this.$gate.hasAllPermissions('add articles|edit articles'); // True
+this.$gates.hasPermission('add articles'); // True
+this.$gates.unlessPermission('add articles'); // False
+this.$gates.hasAnyPermission('add articles|edit articles'); // True
+this.$gates.hasAllPermissions('add articles|edit articles'); // True
 
-this.$gate.hasRole('admin'); // True
-this.$gate.unlessRole('admin'); // False
-this.$gate.hasAnyRole('admin|writer'); // True
-this.$gate.hasAllRoles('admin|writer'); // True
+this.$gates.hasRole('admin'); // True
+this.$gates.unlessRole('admin'); // False
+this.$gates.hasAnyRole('admin|writer'); // True
+this.$gates.hasAllRoles('admin|writer'); // True
 ```
 
 ## ✅ Examples
