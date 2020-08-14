@@ -2,12 +2,12 @@
   "name": "vue-gates",
   "version": "2.0.0",
   "description": "A Vue.js/Nuxt.js package for Permissions/Roles",
-  "unpkg": "dist/vue-gates.js",
-  "main": "dist/vue-gates.js",
+  "types": "index.d.ts",
+  "main": "dist/index.js",
   "scripts": {
     "build": "yarn rollup -c",
-    "eslint": "eslint src/**",
-    "deploy": "yarn eslint && yarn build && npm publish",
+    "lint": "eslint src/**",
+    "deploy": "yarn eslint && yarn build && yarn publish",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -31,7 +31,8 @@
   "author": "John Cruz <sv.johncruz@gmail.com>",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "bugs": {
     "url": "https://github.com/williamcruzme/vue-gates/issues"
@@ -42,14 +43,15 @@
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.4.3",
-    "babel-eslint": "^10.0.1",
+    "@rollup/plugin-babel": "^5.1.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "babel-eslint": "^10.1.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.17.1",
     "rollup": "^1.10.0",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-node-resolve": "^4.2.3",
-    "rollup-plugin-uglify": "^6.0.2"
+    "vue": "^2.6.11"
   }
 }
