@@ -57,9 +57,9 @@ The plugin creates an instance of Laravel accessible globally, and at the same t
 
 ```js
 import Vue from 'vue';
-import LaravelPermissions from 'laravel-permissions';
+import VueGates from 'vue-gates';
 
-Vue.use(LaravelPermissions);
+Vue.use(VueGates);
 ```
 
 ### Step 5: Set permissions and roles
