@@ -1,6 +1,6 @@
-export const isEmpty = obj => Object.keys(obj).length === 0;
+export const isEmpty = (obj) => Object.keys(obj).length === 0;
 
-export const startCase = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
+export const startCase = (string) => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
 
 export const getCondition = (binding) => {
   let suffix = binding.name === 'can' ? 'permission' : binding.name;
@@ -22,14 +22,14 @@ export const getCondition = (binding) => {
   return `${arg}${startCase(suffix)}`;
 };
 
-export const isConditionPassed = Vue => (el, binding) => {
+export const isConditionPassed = (Vue) => (el, binding) => {
   if (!binding.value) {
     console.error('You must specify a value in the directive.');
     return;
   }
 
   // Check if it's a superuser.
-  const isSuperUser = Vue.prototype.$gate.isSuperUser();
+  const isSuperUser = Vue.prototype.$gates.isSuperUser();
   if (isSuperUser) {
     return;
   }
