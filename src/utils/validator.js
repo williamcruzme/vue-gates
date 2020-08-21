@@ -1,6 +1,4 @@
-export const isEmpty = (obj) => Object.keys(obj).length === 0;
-
-export const startCase = (string) => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
+import { startCase, isEmpty } from './strings';
 
 export const getCondition = (binding) => {
   let suffix = binding.name === 'can' ? 'permission' : binding.name;
