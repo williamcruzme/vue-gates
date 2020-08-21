@@ -8,9 +8,7 @@
   <a href="LICENSE"><img src="https://img.shields.io/npm/l/laravel-permissions.svg" alt="License"></a>
 </p>
 
-vue-gates is a plugin for [Vue.js](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use [Laravel Permission](https://github.com/spatie/laravel-permission) in your components.
-
-Being blade-based you only need to specify the directive in your components or DOM elements. The names of the directives are the same as those available in [Laravel Permission](https://github.com/spatie/laravel-permission#using-blade-directives), and EXTRA MORE!.
+vue-gates is a plugin for [Vue.js](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use roles and permissions in your components or DOM elements, also compatible as middleware or methods.
 
 ## 💿 Installation
 
@@ -51,20 +49,24 @@ Or in your Nuxt.js project 🎉:
 
 **1. Create plugin:**
 ```js
-// ~/plugins/laravel-permissions.js
-import Vue from 'vue';
-import VueGates from 'vue-gates';
+// ~/plugins/vue-gates.js
+import Vue from 'vue'
+import VueGates from 'vue-gates'
 
 Vue.use(VueGates);
-// OR
-Vue.use(VueGates, { persistent: true });
+
+export default (_context, inject) => {
+  inject('gates', Vue.prototype.$gates);
+}
 ```
 
 **2. Then register it:**
 ```js
 // nuxt.config.js
 export default {
-  plugins: ['~/plugins/vue-gates']
+  plugins: [
+    '~/plugins/vue-gates'
+  ]
 }
 ```
 
