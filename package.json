@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "A Vue.js/Nuxt.js package for Permissions/Roles",
   "types": "index.d.ts",
-  "main": "dist/index.js",
+  "main": "dist/vue-gates.js",
   "scripts": {
     "build": "yarn rollup -c",
     "lint": "eslint src/**",
