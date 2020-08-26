@@ -1,7 +1,7 @@
 {
   "name": "vue-gates",
   "version": "2.0.0",
-  "description": "A Vue.js/Nuxt.js package for Permissions/Roles",
+  "description": "A Vue.js/Nuxt.js package for Roles/Permissions",
   "types": "index.d.ts",
   "main": "dist/vue-gates.js",
   "scripts": {
