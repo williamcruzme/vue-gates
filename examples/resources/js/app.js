@@ -15,7 +15,7 @@ window.Vue = require('vue');
  * Laravel in Vue applications.
  */
 
-import VueGates from 'vue-gates'
+import VueGates from 'vue-gates';
 
 Vue.use(VueGates);
 

@@ -17,11 +17,11 @@
 <script>
     export default {
         async created() {
-            const { data: permissions } = await axios.get('/api/permissions');
             const { data: roles } = await axios.get('/api/roles');
+            const { data: permissions } = await axios.get('/api/permissions');
 
-            this.$laravel.setPermissions(permissions);
-            this.$laravel.setRoles(roles);
+            this.$gates.setRoles(roles);
+            this.$gates.setPermissions(permissions);
         }
     }
 </script>

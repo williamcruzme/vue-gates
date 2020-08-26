@@ -62,16 +62,16 @@ import VueGates from 'vue-gates';
 Vue.use(VueGates);
 ```
 
-### Step 5: Set permissions and roles
+### Step 5: Set roles and permissions
 
 ```js
-const { data: permissions } = await axios.get('/api/permissions');
 const { data: roles } = await axios.get('/api/roles');
+const { data: permissions } = await axios.get('/api/permissions');
 
-this.$laravel.setPermissions(permissions);
-this.$laravel.setRoles(roles);
+this.$gates.setRoles(roles);
+this.$gates.setPermissions(permissions);
 ```
 
 ### Finish!
 
-That is all. Now you can start using the directives.
+That's all. Now you can start using the directives.

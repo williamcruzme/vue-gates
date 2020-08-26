@@ -9,7 +9,7 @@
 - TypeScript support
 - Nuxt.js support
 
-[GitHub](https://github.com/williamcruzme/laravel-permissions)
+[GitHub](https://github.com/williamcruzme/vue-gates)
 [Getting Started](/installation/quickstart)
 
 <!-- background color -->

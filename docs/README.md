@@ -2,10 +2,10 @@
 <h1 align="center" style="text-align:center">Vue Gates - Protecting every thing</h1>
 
 <p align="center">
-  <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/v/laravel-permissions.svg" alt="Version"></a>
+  <a href="https://www.npmjs.com/package/vue-gates"><img src="https://img.shields.io/npm/v/vue-gates.svg" alt="Version"></a>
   <a href="https://vuejs.org/"><img src="https://badgen.net/badge/Vue/2.x/cyan" alt="Vue"></a>
-  <a href="https://www.npmjs.com/package/laravel-permissions"><img src="https://img.shields.io/npm/dm/laravel-permissions.svg" alt="Downloads"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/npm/l/laravel-permissions.svg" alt="License"></a>
+  <a href="https://www.npmjs.com/package/vue-gates"><img src="https://img.shields.io/npm/dm/vue-gates.svg" alt="Downloads"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/npm/l/vue-gates.svg" alt="License"></a>
 </p>
 
 vue-gates is a plugin for [Vue.js](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use roles and permissions in your components or DOM elements, also compatible as middleware and methods.
@@ -23,11 +23,11 @@ vue-gates is a plugin for [Vue.js](https://vuejs.org/) & [Nuxt.js](https://nuxtj
 
 ## ✅ Examples
 
-See the [examples and instructions](https://github.com/williamcruzme/laravel-permissions/tree/master/examples) with Laravel.
+See the [examples and instructions](https://github.com/williamcruzme/vue-gates/tree/master/examples) with Laravel.
 
 ## 🚸 Contributing
 
-You are welcome to contribute to this project, but before you do, please make sure you read the [contribution guide](https://github.com/williamcruzme/laravel-permissions/blob/master/CONTRIBUTING.md).
+You are welcome to contribute to this project, but before you do, please make sure you read the [contribution guide](https://github.com/williamcruzme/vue-gates/blob/master/CONTRIBUTING.md).
 
 ## 🙈 Credits
 
