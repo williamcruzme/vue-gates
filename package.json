@@ -8,7 +8,7 @@
     "build": "yarn rollup -c",
     "lint": "eslint src/**",
     "deploy": "yarn eslint && yarn build && yarn publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "docs": "docsify serve docs"
   },
   "repository": {
     "type": "git",
