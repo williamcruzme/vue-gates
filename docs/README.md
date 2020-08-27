@@ -17,6 +17,7 @@ vue-gates is a plugin for [Vue.js](https://vuejs.org/) & [Nuxt.js](https://nuxtj
 - Directives
 - Middlewares
 - Methods
+- Wildcard support
 - Support server-side rendering (Nuxt.js)
 - TypeScript support
 - Compatible with IE11

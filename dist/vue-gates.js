@@ -59,6 +59,21 @@
     return value;
   }
 
+  var startCase = function startCase(str) {
+    return "".concat(str.charAt(0).toUpperCase()).concat(str.slice(1));
+  };
+  var isEmpty = function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
+  };
+  var pregQuote = function pregQuote(str, delimiter) {
+    var regex = new RegExp("[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\".concat(delimiter || '', "-]"), 'g');
+    return "".concat(str).replace(regex, '\\$&');
+  };
+  var match = function match(str, wildcard) {
+    var regex = new RegExp(pregQuote(wildcard).replace(/\\\*/g, '.*').replace(/\\\?/g, '.'), 'g');
+    return str.match(regex);
+  };
+
   var _canPersistent = new WeakMap();
 
   var _roles = new WeakMap();
@@ -119,11 +134,13 @@
     });
 
     _defineProperty(this, "isSuperUser", function () {
-      return _classPrivateFieldGet(_this, _superRole) && _classPrivateFieldGet(_this, _roles).includes(_classPrivateFieldGet(_this, _superRole));
+      return _classPrivateFieldGet(_this, _superRole) && _this.hasRole(_classPrivateFieldGet(_this, _superRole));
     });
 
     _defineProperty(this, "hasRole", function (role) {
-      return _classPrivateFieldGet(_this, _roles).includes(role);
+      return !!_classPrivateFieldGet(_this, _roles).find(function (wildcard) {
+        return match(role, wildcard);
+      });
     });
 
     _defineProperty(this, "unlessRole", function (role) {
@@ -133,19 +150,21 @@
     _defineProperty(this, "hasAnyRole", function (values) {
       var roles = values.split('|');
       return roles.some(function (role) {
-        return _classPrivateFieldGet(_this, _roles).includes(role);
+        return _this.hasRole(role);
       });
     });
 
     _defineProperty(this, "hasAllRoles", function (values) {
       var roles = values.split('|');
       return roles.every(function (role) {
-        return _classPrivateFieldGet(_this, _roles).includes(role);
+        return _this.hasRole(role);
       });
     });
 
     _defineProperty(this, "hasPermission", function (permission) {
-      return _classPrivateFieldGet(_this, _permissions).includes(permission);
+      return !!_classPrivateFieldGet(_this, _permissions).find(function (wildcard) {
+        return match(permission, wildcard);
+      });
     });
 
     _defineProperty(this, "unlessPermission", function (permission) {
@@ -155,14 +174,14 @@
     _defineProperty(this, "hasAnyPermission", function (values) {
       var permissions = values.split('|');
       return permissions.some(function (permission) {
-        return _classPrivateFieldGet(_this, _permissions).includes(permission);
+        return _this.hasPermission(permission);
       });
     });
 
     _defineProperty(this, "hasAllPermissions", function (values) {
       var permissions = values.split('|');
       return permissions.every(function (permission) {
-        return _classPrivateFieldGet(_this, _permissions).includes(permission);
+        return _this.hasPermission(permission);
       });
     });
 
@@ -190,13 +209,6 @@
   |
   */
   ;
-
-  var startCase = function startCase(string) {
-    return "".concat(string.charAt(0).toUpperCase()).concat(string.slice(1));
-  };
-  var isEmpty = function isEmpty(obj) {
-    return Object.keys(obj).length === 0;
-  };
 
   var getCondition = function getCondition(binding) {
     var suffix = binding.name === 'can' ? 'permission' : binding.name;
@@ -234,7 +246,7 @@
 
       var condition = getCondition(binding);
 
-      if (!Vue.prototype.$gate[condition](binding.value)) {
+      if (!Vue.prototype.$gates[condition](binding.value)) {
         if (isEmpty(binding.modifiers)) {
           // Remove DOM Element
           el.parentNode.removeChild(el);

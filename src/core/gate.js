@@ -1,3 +1,5 @@
+import { match } from '../utils/strings';
+
 class Gate {
   #canPersistent = false;
 
@@ -56,7 +58,7 @@ class Gate {
 
   getPermissions = () => this.#permissions;
 
-  isSuperUser = () => this.#superRole && this.#roles.includes(this.#superRole);
+  isSuperUser = () => this.#superRole && this.hasRole(this.#superRole);
 
   /*
   |-------------------------------------------------------------------------
@@ -76,27 +78,27 @@ class Gate {
 
   hasAnyRole = (values) => {
     const roles = values.split('|');
-    return roles.some((role) => this.#roles.includes(role));
+    return roles.some((role) => this.hasRole(role));
   }
 
   hasAllRoles = (values) => {
     const roles = values.split('|');
-    return roles.every((role) => this.#roles.includes(role));
+    return roles.every((role) => this.hasRole(role));
   }
 
   // Permissions
-  hasPermission = (permission) => this.#permissions.includes(permission);
+  hasPermission = (permission) => !!this.#permissions.find((wildcard) => match(permission, wildcard));
 
   unlessPermission = (permission) => !this.hasPermission(permission);
 
   hasAnyPermission = (values) => {
     const permissions = values.split('|');
-    return permissions.some((permission) => this.#permissions.includes(permission));
+    return permissions.some((permission) => this.hasPermission(permission));
   }
 
   hasAllPermissions = (values) => {
     const permissions = values.split('|');
-    return permissions.every((permission) => this.#permissions.includes(permission));
+    return permissions.every((permission) => this.hasPermission(permission));
   }
 }
 
