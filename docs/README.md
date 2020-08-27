@@ -4,7 +4,7 @@
 <p align="center">
   <a href="https://www.npmjs.com/package/vue-gates"><img src="https://img.shields.io/npm/v/vue-gates.svg" alt="Version"></a>
   <a href="https://vuejs.org/"><img src="https://badgen.net/badge/Vue/2.x/cyan" alt="Vue"></a>
-  <a href="https://www.npmjs.com/package/vue-gates"><img src="https://img.shields.io/npm/dm/vue-gates.svg" alt="Downloads"></a>
+  <a href="https://www.npmjs.com/package/vue-gates"><img src="https://img.shields.io/npm/dm/laravel-permissions.svg" alt="Downloads"></a>
   <a href="LICENSE"><img src="https://img.shields.io/npm/l/vue-gates.svg" alt="License"></a>
 </p>
 
