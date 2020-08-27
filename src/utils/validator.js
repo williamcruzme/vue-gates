@@ -35,7 +35,7 @@ export const isConditionPassed = (Vue) => (el, binding) => {
   // Get condition to validate
   const condition = getCondition(binding);
 
-  if (!Vue.prototype.$gate[condition](binding.value)) {
+  if (!Vue.prototype.$gates[condition](binding.value)) {
     if (isEmpty(binding.modifiers)) {
       // Remove DOM Element
       el.parentNode.removeChild(el);
