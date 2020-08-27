@@ -138,9 +138,7 @@
     });
 
     _defineProperty(this, "hasRole", function (role) {
-      return !!_classPrivateFieldGet(_this, _roles).find(function (wildcard) {
-        return match(role, wildcard);
-      });
+      return _classPrivateFieldGet(_this, _roles).includes(role);
     });
 
     _defineProperty(this, "unlessRole", function (role) {
