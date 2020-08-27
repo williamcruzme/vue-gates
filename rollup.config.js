@@ -1,20 +1,21 @@
-import { uglify } from 'rollup-plugin-uglify';
-import babel from 'rollup-plugin-babel';
-import resolve from 'rollup-plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
+import resolve from '@rollup/plugin-node-resolve';
 
-export default {
-  input: 'src/laravel-permissions.js',
-  output: {
-    name: 'LaravelPermissions',
-    env: 'production',
-    format: 'umd',
-    file: 'dist/laravel-permissions.js',
+export default [
+  {
+    input: 'src/index.js',
+    output: {
+      name: 'VueGates',
+      env: 'production',
+      format: 'umd',
+      file: 'dist/vue-gates.js',
+    },
+    plugins: [
+      resolve(),
+      babel({
+        babelHelpers: 'bundled',
+        exclude: 'node_modules/**',
+      }),
+    ],
   },
-  plugins: [
-    resolve(),
-    babel({
-      exclude: 'node_modules/**',
-    }),
-    uglify(),
-  ],
-};
+];

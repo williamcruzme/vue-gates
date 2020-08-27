@@ -15,9 +15,9 @@ window.Vue = require('vue');
  * Laravel in Vue applications.
  */
 
-import LaravelPermissions from 'laravel-permissions'
+import VueGates from 'vue-gates';
 
-Vue.use(LaravelPermissions);
+Vue.use(VueGates);
 
 /**
  * The following block of code may be used to automatically register your

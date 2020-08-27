@@ -1,48 +1,57 @@
 {
-  "name": "laravel-permissions",
-  "version": "1.5.3",
-  "description": "A Vue.js 2 directive for Laravel Permissions",
-  "unpkg": "dist/laravel-permissions.js",
-  "main": "dist/laravel-permissions.js",
+  "name": "vue-gates",
+  "version": "2.0.0",
+  "description": "A Vue.js/Nuxt.js package for Roles/Permissions",
+  "types": "index.d.ts",
+  "main": "dist/vue-gates.js",
   "scripts": {
     "build": "yarn rollup -c",
-    "eslint": "eslint src/**",
-    "deploy": "yarn eslint && yarn build && npm publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/**",
+    "deploy": "yarn eslint && yarn build && yarn publish",
+    "docs": "docsify serve docs"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/williamcruzme/laravel-permissions.git"
+    "url": "git+https://github.com/williamcruzme/vue-gates.git"
   },
   "keywords": [
+    "Gates",
     "Laravel",
     "Nuxt.js",
+    "Permission",
     "Permissions",
+    "Role",
+    "Roles",
     "Vue Directive",
-    "Vue.js"
+    "Vue.js",
+    "Vue2",
+    "Vue3",
+    "Vuex"
   ],
   "author": "John Cruz <sv.johncruz@gmail.com>",
   "license": "MIT",
   "files": [
-    "dist"
+    "dist",
+    "index.d.ts"
   ],
   "bugs": {
-    "url": "https://github.com/williamcruzme/laravel-permissions/issues"
+    "url": "https://github.com/williamcruzme/vue-gates/issues"
   },
-  "homepage": "https://github.com/williamcruzme/laravel-permissions#readme",
+  "homepage": "https://github.com/williamcruzme/vue-gates#readme",
   "peerDependencies": {
     "vue": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/preset-env": "^7.4.3",
-    "babel-eslint": "^10.0.1",
+    "@rollup/plugin-babel": "^5.1.0",
+    "@rollup/plugin-node-resolve": "^8.4.0",
+    "babel-eslint": "^10.1.0",
     "eslint": "^5.16.0",
-    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.17.1",
     "rollup": "^1.10.0",
-    "rollup-plugin-babel": "^4.3.2",
-    "rollup-plugin-node-resolve": "^4.2.3",
-    "rollup-plugin-uglify": "^6.0.2"
+    "vue": "^2.6.11"
   }
 }

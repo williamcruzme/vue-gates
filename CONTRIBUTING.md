@@ -1,4 +1,4 @@
-# Contributing to Laravel-Permissions
+# Contributing to Vue Gates
 
 First of all, thanks for taking interest into contributing to this repository, below is what you need to know about the project.
 
@@ -7,7 +7,7 @@ First of all, thanks for taking interest into contributing to this repository, b
 Fork the repository, or clone it:
 
 ```bash
-git clone https://github.com/williamcruzme/laravel-permissions
+git clone https://github.com/williamcruzme/vue-gates
 ```
 
 Install dependencies using [yarn](https://yarnpkg.com)
@@ -21,8 +21,10 @@ yarn
 As you can see we have:
 
 - `dist`: contains the unminified and the minified build of the repository.
+- `docs`: contains the markdown files for the GitHub Pages.
 - `examples`: contains the examples for Laravel implementation.
 - `src` contains the working code for the repository:
+  - `core`: contains the core of the package.
   - `utils`: contains commonly used utility functions.
 
 ### Issues

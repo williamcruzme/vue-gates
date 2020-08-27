@@ -1,6 +1,4 @@
-export const isEmpty = obj => Object.keys(obj).length === 0;
-
-export const startCase = string => `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
+import { startCase, isEmpty } from './strings';
 
 export const getCondition = (binding) => {
   let suffix = binding.name === 'can' ? 'permission' : binding.name;
@@ -22,17 +20,22 @@ export const getCondition = (binding) => {
   return `${arg}${startCase(suffix)}`;
 };
 
-export const isConditionPassed = Vue => (el, binding) => {
+export const isConditionPassed = (Vue) => (el, binding) => {
   if (!binding.value) {
     console.error('You must specify a value in the directive.');
     return;
   }
 
-  // Get condition to call
+  // Check if it's a superuser.
+  const isSuperUser = Vue.prototype.$gates.isSuperUser();
+  if (isSuperUser) {
+    return;
+  }
+
+  // Get condition to validate
   const condition = getCondition(binding);
 
-  // Check if value exists in property value
-  if (!Vue.prototype.$laravel[condition](binding.value)) {
+  if (!Vue.prototype.$gates[condition](binding.value)) {
     if (isEmpty(binding.modifiers)) {
       // Remove DOM Element
       el.parentNode.removeChild(el);
