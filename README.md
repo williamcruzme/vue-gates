@@ -10,7 +10,7 @@
 
 vue-gates is a plugin for [Vue.js](https://vuejs.org/) & [Nuxt.js](https://nuxtjs.org/) that allows you to use roles and permissions in your components or DOM elements, also compatible as middleware and methods.
 
-See the [full documentation]()
+See the [full documentation](https://williamcruzme.github.io/vue-gates/#/)
 
 ## Features
 
