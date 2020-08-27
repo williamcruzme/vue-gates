@@ -7,7 +7,7 @@
   "scripts": {
     "build": "yarn rollup -c",
     "lint": "eslint src/**",
-    "deploy": "yarn eslint && yarn build && yarn publish",
+    "deploy": "yarn lint && yarn build && yarn publish",
     "docs": "docsify serve docs"
   },
   "repository": {
