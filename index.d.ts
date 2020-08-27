@@ -22,11 +22,30 @@ export interface VueGatesOptions {
 }
 
 declare module 'vue/types/vue' {
+  // this.$gates inside Vue components
   interface Vue {
     $gates: Gates;
   }
-interface VueConstructor {
-    gates:  Gates;
+  interface VueConstructor {
+    gates: Gates;
+  }
+}
+
+declare module '@nuxt/types' {
+  // nuxtContext.app.$gates inside asyncData, fetch, plugins, middleware, nuxtServerInit
+  interface Context {
+    $gates: Gates;
+  }
+  // nuxtContext.$gates
+  interface NuxtAppOptions {
+    $gates: Gates;
+  }
+}
+
+declare module 'vuex/types/index' {
+  // this.$gates inside Vuex stores
+  interface Store {
+    $gates: Gates;
   }
 }
 
