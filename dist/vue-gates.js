@@ -256,15 +256,15 @@
     };
   };
 
-  var registerDirectives = function registerDirectives(Vue) {
+  var registerDirectives = function registerDirectives(app) {
     var directiveOptions = {
-      inserted: isConditionPassed(Vue)
+      inserted: isConditionPassed(app)
     };
-    Vue.directive('permission', directiveOptions);
-    Vue.directive('can', directiveOptions); // Alias for "v-permission"
+    app.directive('permission', directiveOptions);
+    app.directive('can', directiveOptions); // Alias for "v-permission"
 
-    Vue.directive('role', directiveOptions);
-    Vue.directive('role-or-permission', {
+    app.directive('role', directiveOptions);
+    app.directive('role-or-permission', {
       inserted: function inserted(el, binding) {
         if (!binding.value) {
           console.error('You must specify a value in the directive.');
@@ -275,7 +275,7 @@
         var role = values[0];
         var permission = values[1];
 
-        if (!Vue.prototype.$gates.hasRole(role) && !Vue.prototype.$gates.hasPermission(permission)) {
+        if (!app.prototype.$gates.hasRole(role) && !app.prototype.$gates.hasPermission(permission)) {
           // Remove DOM Element
           el.parentNode.removeChild(el);
         }
@@ -284,12 +284,11 @@
   };
 
   var index = {
-    install: function install(Vue) {
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    install: function install(app, options) {
       var gate = new Gate(options);
-      Vue.prototype.$gates = gate;
-      Vue.gates = gate;
-      registerDirectives(Vue);
+      app.config.globalProperties.$gates = gate;
+      app.gates = gate;
+      registerDirectives(app);
     }
   };
 
