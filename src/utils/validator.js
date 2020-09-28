@@ -1,6 +1,6 @@
 import { startCase, isEmpty } from './strings';
 
-export const getCondition = (binding) => {
+export const parseCondition = (binding) => {
   let suffix = binding.name === 'can' ? 'permission' : binding.name;
   let arg = 'has';
 
@@ -20,7 +20,7 @@ export const getCondition = (binding) => {
   return `${arg}${startCase(suffix)}`;
 };
 
-export const isConditionPassed = (app, validations = null) => (el, binding) => {
+export const isConditionPassed = (app, condition) => (el, binding) => {
   if (!binding.value) {
     console.error('You must specify a value in the directive.');
     return;
@@ -34,10 +34,11 @@ export const isConditionPassed = (app, validations = null) => (el, binding) => {
 
   // Get condition to validate
   let isValid = false;
-  if (validations) {
-    isValid = validations(binding);
+  if (typeof condition === 'function') {
+    isValid = condition(binding);
   } else {
-    isValid = app.gates[getCondition(binding)](binding.value);
+    binding.name = condition; // Fix missing name property
+    isValid = app.gates[parseCondition(binding)](binding.value);
   }
 
   if (!isValid) {

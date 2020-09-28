@@ -3,13 +3,13 @@ import { isConditionPassed } from './utils/validator';
 
 const registerDirectives = (app, newSyntax = false) => {
   const lifecycleName = newSyntax ? 'mounted' : 'inserted';
-  const directiveOptions = {
-    [lifecycleName]: isConditionPassed(app),
-  };
+  const directiveOptions = (condition) => [condition, {
+    [lifecycleName]: isConditionPassed(app, condition),
+  }];
 
-  app.directive('permission', directiveOptions);
-  app.directive('can', directiveOptions); // Alias for "v-permission"
-  app.directive('role', directiveOptions);
+  app.directive(...directiveOptions('role'));
+  app.directive(...directiveOptions('permission'));
+  app.directive(...directiveOptions('can')); // Alias for "v-permission"
   app.directive('role-or-permission', {
     [lifecycleName]: isConditionPassed(app, (binding) => {
       const values = binding.value.split('|');
