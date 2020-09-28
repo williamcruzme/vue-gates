@@ -25,6 +25,39 @@
     return obj;
   }
 
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+  }
+
+  function _iterableToArray(iter) {
+    if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter);
+  }
+
+  function _unsupportedIterableToArray(o, minLen) {
+    if (!o) return;
+    if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+    var n = Object.prototype.toString.call(o).slice(8, -1);
+    if (n === "Object" && o.constructor) n = o.constructor.name;
+    if (n === "Map" || n === "Set") return Array.from(o);
+    if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+  }
+
+  function _arrayLikeToArray(arr, len) {
+    if (len == null || len > arr.length) len = arr.length;
+
+    for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+    return arr2;
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+  }
+
   function _classPrivateFieldGet(receiver, privateMap) {
     var descriptor = privateMap.get(receiver);
 
@@ -208,7 +241,7 @@
   */
   ;
 
-  var getCondition = function getCondition(binding) {
+  var parseCondition = function parseCondition(binding) {
     var suffix = binding.name === 'can' ? 'permission' : binding.name;
     var arg = 'has';
 
@@ -227,7 +260,7 @@
 
     return "".concat(arg).concat(startCase(suffix));
   };
-  var isConditionPassed = function isConditionPassed(app) {
+  var isConditionPassed = function isConditionPassed(app, condition) {
     return function (el, binding) {
       if (!binding.value) {
         console.error('You must specify a value in the directive.');
@@ -242,9 +275,17 @@
       } // Get condition to validate
 
 
-      var condition = getCondition(binding);
+      var isValid = false;
 
-      if (!app.gates[condition](binding.value)) {
+      if (typeof condition === 'function') {
+        isValid = condition(binding);
+      } else {
+        binding.name = condition; // Fix missing name property
+
+        isValid = app.gates[parseCondition(binding)](binding.value);
+      }
+
+      if (!isValid) {
         if (isEmpty(binding.modifiers)) {
           // Remove DOM Element
           el.parentNode.removeChild(el);
@@ -258,30 +299,22 @@
 
   var registerDirectives = function registerDirectives(app) {
     var newSyntax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var lifecycleName = newSyntax ? 'mounted' : 'inserted';
 
-    var directiveOptions = _defineProperty({}, newSyntax ? 'mounted' : 'inserted', isConditionPassed(app));
+    var directiveOptions = function directiveOptions(condition) {
+      return [condition, _defineProperty({}, lifecycleName, isConditionPassed(app, condition))];
+    };
 
-    app.directive('permission', directiveOptions);
-    app.directive('can', directiveOptions); // Alias for "v-permission"
+    app.directive.apply(app, _toConsumableArray(directiveOptions('role')));
+    app.directive.apply(app, _toConsumableArray(directiveOptions('permission')));
+    app.directive.apply(app, _toConsumableArray(directiveOptions('can'))); // Alias for "v-permission"
 
-    app.directive('role', directiveOptions);
-    app.directive('role-or-permission', {
-      inserted: function inserted(el, binding) {
-        if (!binding.value) {
-          console.error('You must specify a value in the directive.');
-          return;
-        }
-
-        var values = binding.value.split('|');
-        var role = values[0];
-        var permission = values[1];
-
-        if (!app.gates.hasRole(role) && !app.gates.hasPermission(permission)) {
-          // Remove DOM Element
-          el.parentNode.removeChild(el);
-        }
-      }
-    });
+    app.directive('role-or-permission', _defineProperty({}, lifecycleName, isConditionPassed(app, function (binding) {
+      var values = binding.value.split('|');
+      var role = values[0];
+      var permission = values[1];
+      return app.gates.hasRole(role) || app.gates.hasPermission(permission);
+    })));
   };
 
   var index = {
