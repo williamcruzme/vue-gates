@@ -2,38 +2,22 @@ import Gate from './core/gate';
 import { isConditionPassed } from './utils/validator';
 
 const registerDirectives = (app, newSyntax = false) => {
+  const lifecycleName = newSyntax ? 'mounted' : 'inserted';
   const directiveOptions = {
-    [newSyntax ? 'mounted' : 'inserted']: isConditionPassed(app),
+    [lifecycleName]: isConditionPassed(app),
   };
 
   app.directive('permission', directiveOptions);
   app.directive('can', directiveOptions); // Alias for "v-permission"
   app.directive('role', directiveOptions);
   app.directive('role-or-permission', {
-    inserted: (el, binding) => {
-      if (!binding.value) {
-        console.error('You must specify a value in the directive.');
-        return;
-      }
-
-      // Check if it's a superuser.
-      const isSuperUser = app.gates.isSuperUser();
-      if (isSuperUser) {
-        return;
-      }
-
+    [lifecycleName]: isConditionPassed(app, (binding) => {
       const values = binding.value.split('|');
       const role = values[0];
       const permission = values[1];
 
-      if (
-        !app.gates.hasRole(role)
-        && !app.gates.hasPermission(permission)
-      ) {
-        // Remove DOM Element
-        el.parentNode.removeChild(el);
-      }
-    },
+      return app.gates.hasRole(role) || app.gates.hasPermission(permission);
+    }),
   });
 };
 

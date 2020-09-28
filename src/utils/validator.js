@@ -20,7 +20,7 @@ export const getCondition = (binding) => {
   return `${arg}${startCase(suffix)}`;
 };
 
-export const isConditionPassed = (app) => (el, binding) => {
+export const isConditionPassed = (app, validations = null) => (el, binding) => {
   if (!binding.value) {
     console.error('You must specify a value in the directive.');
     return;
@@ -33,9 +33,14 @@ export const isConditionPassed = (app) => (el, binding) => {
   }
 
   // Get condition to validate
-  const condition = getCondition(binding);
+  let isValid = false;
+  if (validations) {
+    isValid = validations(binding);
+  } else {
+    isValid = app.gates[getCondition(binding)](binding.value);
+  }
 
-  if (!app.gates[condition](binding.value)) {
+  if (!isValid) {
     if (isEmpty(binding.modifiers)) {
       // Remove DOM Element
       el.parentNode.removeChild(el);
