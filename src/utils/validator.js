@@ -20,14 +20,14 @@ export const getCondition = (binding) => {
   return `${arg}${startCase(suffix)}`;
 };
 
-export const isConditionPassed = (Vue) => (el, binding) => {
+export const isConditionPassed = (app) => (el, binding) => {
   if (!binding.value) {
     console.error('You must specify a value in the directive.');
     return;
   }
 
   // Check if it's a superuser.
-  const isSuperUser = Vue.prototype.$gates.isSuperUser();
+  const isSuperUser = app.gates.isSuperUser();
   if (isSuperUser) {
     return;
   }
@@ -35,7 +35,7 @@ export const isConditionPassed = (Vue) => (el, binding) => {
   // Get condition to validate
   const condition = getCondition(binding);
 
-  if (!Vue.prototype.$gates[condition](binding.value)) {
+  if (!app.gates[condition](binding.value)) {
     if (isEmpty(binding.modifiers)) {
       // Remove DOM Element
       el.parentNode.removeChild(el);

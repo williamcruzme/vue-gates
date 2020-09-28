@@ -1,9 +1,9 @@
 import Gate from './core/gate';
 import { isConditionPassed } from './utils/validator';
 
-const registerDirectives = (app) => {
+const registerDirectives = (app, newSyntax = false) => {
   const directiveOptions = {
-    inserted: isConditionPassed(app),
+    [newSyntax ? 'mounted' : 'inserted']: isConditionPassed(app),
   };
 
   app.directive('permission', directiveOptions);
@@ -21,8 +21,8 @@ const registerDirectives = (app) => {
       const permission = values[1];
 
       if (
-        !app.prototype.$gates.hasRole(role)
-        && !app.prototype.$gates.hasPermission(permission)
+        !app.gates.hasRole(role)
+        && !app.gates.hasPermission(permission)
       ) {
       // Remove DOM Element
         el.parentNode.removeChild(el);
@@ -32,10 +32,16 @@ const registerDirectives = (app) => {
 };
 
 export default {
-  install: (app, options) => {
+  install: (app, options = {}) => {
     const gate = new Gate(options);
+    const isVue3 = !!app.config;
 
-    app.config.globalProperties.$gates = gate;
+    if (isVue3) {
+      app.config.globalProperties.$gates = gate;
+    } else {
+      app.prototype.$gates = gate;
+    }
+
     app.gates = gate;
 
     registerDirectives(app);
