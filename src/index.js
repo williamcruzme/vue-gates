@@ -24,7 +24,7 @@ const registerDirectives = (app, newSyntax = false) => {
 export default {
   install: (app, options = {}) => {
     const gate = new Gate(options);
-    const isVue3 = !!app.config;
+    const isVue3 = !!app.config.globalProperties;
 
     if (isVue3) {
       app.config.globalProperties.$gates = gate;

@@ -321,7 +321,7 @@
     install: function install(app) {
       var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var gate = new Gate(options);
-      var isVue3 = !!app.config;
+      var isVue3 = !!app.config.globalProperties;
 
       if (isVue3) {
         app.config.globalProperties.$gates = gate;
