@@ -47,6 +47,8 @@ declare module 'vuex/types/index' {
   }
 }
 
-export function install(app: any, options?: VueGatesOptions): void
+declare class VueGates {
+  install: (app: any, options?: VueGatesOptions) => void
+}
 
 export default VueGates;
