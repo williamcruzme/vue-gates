@@ -1,10 +1,13 @@
 import Gate from './core/gate';
+import GateComponent from './components/Gate.vue';
 import { isConditionPassed } from './utils/validator';
 
 const registerDirectives = (Vue) => {
   const directiveOptions = {
     inserted: isConditionPassed(Vue),
   };
+
+  Vue.component('Gate', GateComponent);
 
   Vue.directive('permission', directiveOptions);
   Vue.directive('can', directiveOptions); // Alias for "v-permission"
@@ -24,7 +27,7 @@ const registerDirectives = (Vue) => {
         !Vue.prototype.$gates.hasRole(role)
         && !Vue.prototype.$gates.hasPermission(permission)
       ) {
-      // Remove DOM Element
+        // Remove DOM Element
         el.parentNode.removeChild(el);
       }
     },
