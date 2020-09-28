@@ -227,7 +227,7 @@
 
     return "".concat(arg).concat(startCase(suffix));
   };
-  var isConditionPassed = function isConditionPassed(Vue) {
+  var isConditionPassed = function isConditionPassed(app) {
     return function (el, binding) {
       if (!binding.value) {
         console.error('You must specify a value in the directive.');
@@ -235,7 +235,7 @@
       } // Check if it's a superuser.
 
 
-      var isSuperUser = Vue.prototype.$gates.isSuperUser();
+      var isSuperUser = app.gates.isSuperUser();
 
       if (isSuperUser) {
         return;
@@ -244,7 +244,7 @@
 
       var condition = getCondition(binding);
 
-      if (!Vue.prototype.$gates[condition](binding.value)) {
+      if (!app.gates[condition](binding.value)) {
         if (isEmpty(binding.modifiers)) {
           // Remove DOM Element
           el.parentNode.removeChild(el);
@@ -257,9 +257,10 @@
   };
 
   var registerDirectives = function registerDirectives(app) {
-    var directiveOptions = {
-      inserted: isConditionPassed(app)
-    };
+    var newSyntax = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+    var directiveOptions = _defineProperty({}, newSyntax ? 'mounted' : 'inserted', isConditionPassed(app));
+
     app.directive('permission', directiveOptions);
     app.directive('can', directiveOptions); // Alias for "v-permission"
 
@@ -275,7 +276,7 @@
         var role = values[0];
         var permission = values[1];
 
-        if (!app.prototype.$gates.hasRole(role) && !app.prototype.$gates.hasPermission(permission)) {
+        if (!app.gates.hasRole(role) && !app.gates.hasPermission(permission)) {
           // Remove DOM Element
           el.parentNode.removeChild(el);
         }
@@ -284,9 +285,17 @@
   };
 
   var index = {
-    install: function install(app, options) {
+    install: function install(app) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
       var gate = new Gate(options);
-      app.config.globalProperties.$gates = gate;
+      var isVue3 = !!app.config;
+
+      if (isVue3) {
+        app.config.globalProperties.$gates = gate;
+      } else {
+        app.prototype.$gates = gate;
+      }
+
       app.gates = gate;
       registerDirectives(app);
     }
