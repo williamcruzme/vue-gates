@@ -1,6 +1,6 @@
 ![logo](_media/logo.png)
 
-# Vue Gates <small>2.0.0</small>
+# Vue Gates <small>2.1.0</small>
 
 > Protecting every thing
 
