@@ -16,6 +16,12 @@ const registerDirectives = (app, newSyntax = false) => {
         return;
       }
 
+      // Check if it's a superuser.
+      const isSuperUser = app.gates.isSuperUser();
+      if (isSuperUser) {
+        return;
+      }
+
       const values = binding.value.split('|');
       const role = values[0];
       const permission = values[1];
@@ -24,7 +30,7 @@ const registerDirectives = (app, newSyntax = false) => {
         !app.gates.hasRole(role)
         && !app.gates.hasPermission(permission)
       ) {
-      // Remove DOM Element
+        // Remove DOM Element
         el.parentNode.removeChild(el);
       }
     },
