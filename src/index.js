@@ -1,15 +1,15 @@
 import Gate from './core/gate';
 import { isConditionPassed } from './utils/validator';
 
-const registerDirectives = (Vue) => {
+const registerDirectives = (app) => {
   const directiveOptions = {
-    inserted: isConditionPassed(Vue),
+    inserted: isConditionPassed(app),
   };
 
-  Vue.directive('permission', directiveOptions);
-  Vue.directive('can', directiveOptions); // Alias for "v-permission"
-  Vue.directive('role', directiveOptions);
-  Vue.directive('role-or-permission', {
+  app.directive('permission', directiveOptions);
+  app.directive('can', directiveOptions); // Alias for "v-permission"
+  app.directive('role', directiveOptions);
+  app.directive('role-or-permission', {
     inserted: (el, binding) => {
       if (!binding.value) {
         console.error('You must specify a value in the directive.');
@@ -21,8 +21,8 @@ const registerDirectives = (Vue) => {
       const permission = values[1];
 
       if (
-        !Vue.prototype.$gates.hasRole(role)
-        && !Vue.prototype.$gates.hasPermission(permission)
+        !app.prototype.$gates.hasRole(role)
+        && !app.prototype.$gates.hasPermission(permission)
       ) {
       // Remove DOM Element
         el.parentNode.removeChild(el);
@@ -32,12 +32,12 @@ const registerDirectives = (Vue) => {
 };
 
 export default {
-  install(Vue, options = {}) {
+  install: (app, options) => {
     const gate = new Gate(options);
 
-    Vue.prototype.$gates = gate;
-    Vue.gates = gate;
+    app.config.globalProperties.$gates = gate;
+    app.gates = gate;
 
-    registerDirectives(Vue);
+    registerDirectives(app);
   },
 };
