@@ -80,5 +80,6 @@ Check for role or permission:
 ```vue
 <button v-permission:has.disabled="'add articles'">Add Article</button>
 
+<input v-role.required.autofocus="'admin'" />
 <input v-role:any.required.autofocus="'admin|super admin'" />
 ```

@@ -1,6 +1,6 @@
 import { startCase, isEmpty } from './strings';
 
-export const getCondition = (binding) => {
+export const parseCondition = (binding) => {
   let suffix = binding.name === 'can' ? 'permission' : binding.name;
   let arg = 'has';
 
@@ -20,22 +20,28 @@ export const getCondition = (binding) => {
   return `${arg}${startCase(suffix)}`;
 };
 
-export const isConditionPassed = (Vue) => (el, binding) => {
+export const isConditionPassed = (app, condition) => (el, binding) => {
   if (!binding.value) {
     console.error('You must specify a value in the directive.');
     return;
   }
 
   // Check if it's a superuser.
-  const isSuperUser = Vue.prototype.$gates.isSuperUser();
+  const isSuperUser = app.gates.isSuperUser();
   if (isSuperUser) {
     return;
   }
 
   // Get condition to validate
-  const condition = getCondition(binding);
+  let isValid = false;
+  if (typeof condition === 'function') {
+    isValid = condition(binding);
+  } else {
+    binding.name = condition; // Fix missing name property
+    isValid = app.gates[parseCondition(binding)](binding.value);
+  }
 
-  if (!Vue.prototype.$gates[condition](binding.value)) {
+  if (!isValid) {
     if (isEmpty(binding.modifiers)) {
       // Remove DOM Element
       el.parentNode.removeChild(el);
