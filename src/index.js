@@ -44,6 +44,6 @@ export default {
 
     app.gates = gate;
 
-    registerDirectives(app);
+    registerDirectives(app, isVue3);
   },
 };
