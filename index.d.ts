@@ -1,5 +1,3 @@
-import { PluginFunction } from 'vue';
-
 declare class Gates {
   setRoles: (roles: Array<string>) => void;
   setPermissions: (permissions: Array<string>) => void;
@@ -49,8 +47,6 @@ declare module 'vuex/types/index' {
   }
 }
 
-declare class VueGates {
-  static install: PluginFunction<VueGatesOptions>;
-}
+export function install(app: any, options?: VueGatesOptions): void
 
 export default VueGates;
