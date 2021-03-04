@@ -42,7 +42,7 @@ declare module '@nuxt/types' {
 
 declare module 'vuex/types/index' {
   // this.$gates inside Vuex stores
-  interface Store {
+  interface Store<S> {
     $gates: Gates;
   }
 }
