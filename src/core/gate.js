@@ -58,7 +58,7 @@ class Gate {
 
   getPermissions = () => this.#permissions;
 
-  isSuperUser = () => this.#superRole && this.hasRole(this.#superRole);
+  isSuperUser = () => this.#superRole && this.#roles.includes(this.#superRole);
 
   /*
   |-------------------------------------------------------------------------
@@ -72,31 +72,47 @@ class Gate {
   */
 
   // Roles
-  hasRole = (role) => this.#roles.includes(role);
+  hasRole = (role) => this.isSuperUser() || this.#roles.includes(role);
 
   unlessRole = (role) => !this.hasRole(role);
 
   hasAnyRole = (values) => {
+    if (this.isSuperUser()) {
+      return true;
+    }
+
     const roles = values.split('|');
     return roles.some((role) => this.hasRole(role));
   }
 
   hasAllRoles = (values) => {
+    if (this.isSuperUser()) {
+      return true;
+    }
+
     const roles = values.split('|');
     return roles.every((role) => this.hasRole(role));
   }
 
   // Permissions
-  hasPermission = (permission) => !!this.#permissions.find((wildcard) => match(permission, wildcard));
+  hasPermission = (permission) => this.isSuperUser() || !!this.#permissions.find((wildcard) => match(permission, wildcard));
 
   unlessPermission = (permission) => !this.hasPermission(permission);
 
   hasAnyPermission = (values) => {
+    if (this.isSuperUser()) {
+      return true;
+    }
+
     const permissions = values.split('|');
     return permissions.some((permission) => this.hasPermission(permission));
   }
 
   hasAllPermissions = (values) => {
+    if (this.isSuperUser()) {
+      return true;
+    }
+
     const permissions = values.split('|');
     return permissions.every((permission) => this.hasPermission(permission));
   }

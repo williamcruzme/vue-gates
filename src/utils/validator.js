@@ -26,12 +26,6 @@ export const isConditionPassed = (app, condition) => (el, binding) => {
     return;
   }
 
-  // Check if it's a superuser.
-  const isSuperUser = app.gates.isSuperUser();
-  if (isSuperUser) {
-    return;
-  }
-
   // Get condition to validate
   let isValid = false;
   if (typeof condition === 'function') {
