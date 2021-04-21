@@ -14,9 +14,11 @@ declare class Gates {
   hasAllPermissions(values: string): boolean;
 }
 
-export interface VueGatesOptions {
-  persistent?: boolean;
-  superRole?: string;
+declare module '@vue/runtime-core' {
+  // Vue 3
+  interface ComponentCustomProperties  {
+    $gates: Gates
+  }
 }
 
 declare module 'vue/types/vue' {
@@ -30,25 +32,31 @@ declare module 'vue/types/vue' {
 }
 
 declare module '@nuxt/types' {
-  // nuxtContext.app.$gates inside asyncData, fetch, plugins, middleware, nuxtServerInit
+  // context.app.$gates inside asyncData, fetch, plugins, middleware, nuxtServerInit
   interface Context {
     $gates: Gates;
   }
-  // nuxtContext.$gates
+  // context.$gates
   interface NuxtAppOptions {
     $gates: Gates;
   }
 }
 
 declare module 'vuex/types/index' {
-  // this.$gates inside Vuex stores
+  // this.$gates inside Vuex store
   interface Store<S> {
     $gates: Gates;
   }
 }
 
+export interface VueGatesOptions {
+  persistent?: boolean;
+  superRole?: string;
+}
+
 declare class VueGates {
-  install: (app: any, options?: VueGatesOptions) => void
+  install: (app: any, options?: VueGatesOptions) => void;
+  [key: string]: any;
 }
 
 export default VueGates;
