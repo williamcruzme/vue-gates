@@ -98,12 +98,11 @@
   var isEmpty = function isEmpty(obj) {
     return Object.keys(obj).length === 0;
   };
-  var pregQuote = function pregQuote(str, delimiter) {
-    var regex = new RegExp("[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\".concat(delimiter || '', "-]"), 'g');
-    return "".concat(str).replace(regex, '\\$&');
+  var pregQuote = function pregQuote(str) {
+    return str.replace(/[|\\{}()[\]^$+*?.]/g, '\\$&');
   };
   var match = function match(str, wildcard) {
-    var regex = new RegExp(pregQuote(wildcard).replace(/\\\*/g, '.*').replace(/\\\?/g, '.'), 'g');
+    var regex = new RegExp("^".concat(wildcard.split(/\*+/).map(pregQuote).join('.*'), "$"), 'g');
     return str.match(regex);
   };
 
@@ -167,11 +166,11 @@
     });
 
     _defineProperty(this, "isSuperUser", function () {
-      return _classPrivateFieldGet(_this, _superRole) && _this.hasRole(_classPrivateFieldGet(_this, _superRole));
+      return _classPrivateFieldGet(_this, _superRole) && _classPrivateFieldGet(_this, _roles).includes(_classPrivateFieldGet(_this, _superRole));
     });
 
     _defineProperty(this, "hasRole", function (role) {
-      return _classPrivateFieldGet(_this, _roles).includes(role);
+      return _this.isSuperUser() || _classPrivateFieldGet(_this, _roles).includes(role);
     });
 
     _defineProperty(this, "unlessRole", function (role) {
@@ -179,6 +178,10 @@
     });
 
     _defineProperty(this, "hasAnyRole", function (values) {
+      if (_this.isSuperUser()) {
+        return true;
+      }
+
       var roles = values.split('|');
       return roles.some(function (role) {
         return _this.hasRole(role);
@@ -186,6 +189,10 @@
     });
 
     _defineProperty(this, "hasAllRoles", function (values) {
+      if (_this.isSuperUser()) {
+        return true;
+      }
+
       var roles = values.split('|');
       return roles.every(function (role) {
         return _this.hasRole(role);
@@ -193,7 +200,7 @@
     });
 
     _defineProperty(this, "hasPermission", function (permission) {
-      return !!_classPrivateFieldGet(_this, _permissions).find(function (wildcard) {
+      return _this.isSuperUser() || !!_classPrivateFieldGet(_this, _permissions).find(function (wildcard) {
         return match(permission, wildcard);
       });
     });
@@ -203,6 +210,10 @@
     });
 
     _defineProperty(this, "hasAnyPermission", function (values) {
+      if (_this.isSuperUser()) {
+        return true;
+      }
+
       var permissions = values.split('|');
       return permissions.some(function (permission) {
         return _this.hasPermission(permission);
@@ -210,6 +221,10 @@
     });
 
     _defineProperty(this, "hasAllPermissions", function (values) {
+      if (_this.isSuperUser()) {
+        return true;
+      }
+
       var permissions = values.split('|');
       return permissions.every(function (permission) {
         return _this.hasPermission(permission);
@@ -264,13 +279,6 @@
     return function (el, binding) {
       if (!binding.value) {
         console.error('You must specify a value in the directive.');
-        return;
-      } // Check if it's a superuser.
-
-
-      var isSuperUser = app.gates.isSuperUser();
-
-      if (isSuperUser) {
         return;
       } // Get condition to validate
 
