@@ -12,10 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
-      - run: yarn install --frozen-lockfile
+          node-version: 12
+      - run: yarn
       - run: yarn build
 
   publish-npm:
@@ -23,27 +23,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: 12
           registry-url: https://registry.npmjs.org/
-          always-auth: true
-      - run: yarn install --frozen-lockfile
+      - run: yarn
       - run: yarn publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
   publish-gpr:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: 12
           registry-url: https://npm.pkg.github.com/
-          always-auth: true
-      - run: yarn install --frozen-lockfile
+      - run: yarn
       - run: yarn publish
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
