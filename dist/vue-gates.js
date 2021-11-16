@@ -296,7 +296,7 @@
       if (!isValid) {
         if (isEmpty(binding.modifiers)) {
           // Remove DOM Element
-          el.parentNode.removeChild(el);
+          el.remove();
         } else {
           // Set attributes to DOM element
           Object.assign(el, binding.modifiers);
